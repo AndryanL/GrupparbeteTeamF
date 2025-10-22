@@ -2,11 +2,12 @@
 ## Grupp F - Veronica Byström - Maria Gileborn - Andryan Lenander - Victoriia Khrypun --- 
 
 ## 1.Planering (Stand-up) 
-| Namn | Vad gjorde jag senast? | Vad ska jag göra idag? | Hinder? |
-|Veronica | N/A | N/A | N/A | 
-|Maria| | N/A | N/A | N/A | 
-|Andryan| | N/A | N/A | N/A | 
-|Victoriia| | N/A | N/A | N/A | 
+| Namn      | Vad gjorde jag senast? | Vad ska jag göra idag? | Hinder?     |
+|-----------|------------------------|------------------------|-------------|
+| Viktoriia | Placeholder            | Placeholder            | Placeholder |
+| Maria     | Placeholder            | Placeholder            | Placeholder |
+| Andryan   | Placeholder            | Placeholder            | Placeholder |
+| Veronica  | Placeholder            | Placeholder            | Placeholder |
 
 ---
 
