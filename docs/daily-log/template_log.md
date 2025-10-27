@@ -1,8 +1,8 @@
 # Boiler Room – Daily Log Datum: 2025-10- 
-## Grupp F - Veronica Byström - Maria Gileborn - Andryan Lenander - Victoriia Khrypun --- 
+## Group F - Veronica Byström - Maria Gileborn - Andryan Lenander - Victoriia Khrypun --- 
 
-## 1.Planering (Stand-up) 
-| Namn      | Vad gjorde jag senast? | Vad ska jag göra idag? | Hinder?     |
+## 1.Planning (Stand-up) 
+| Name      | What did i do last time? | What will i do today? | Obstacles?     |
 |-----------|------------------------|------------------------|-------------|
 | Viktoriia | Placeholder            | Placeholder            | Placeholder |
 | Maria     | Placeholder            | Placeholder            | Placeholder |
@@ -11,55 +11,57 @@
 
 ---
 
-**Dagens gemensamma mål:** 
+**Daily team goal:** 
 - [ ] 
 - [ ]
 
 --- 
 
-## 2. Under arbetet 
-**Vad vi fokuserade på:** 
+## 2. During the day 
+
+**What we focused on:** 
 - 
 
-**Beslut eller ändringar i planering:** 
+**Decisions or changes in planning:** 
 - 
 
-**Nya insikter eller problem:** 
-- 
-
---- 
-
-## 3. Review & Reflektion 
-**Reflektera gemensamt i slutet av dagen:** 
-- 
-
-**Vad fungerade bra idag?** 
-- 
-
-**Vad var utmanande?**
-- 
-
-**Vad lärde vi oss?**
-- 
-
-**Vad ska vi tänka på till nästa gång?**
-- 
-
-**Vadvill vi ta upp med utbildaren?** 
+**New insights or problems:** 
 - 
 
 --- 
 
-## 4. Övrigt / Anteckningar 
+## 3. Review & Reflection 
+**Reflect together at the end of the day:** 
+- 
+
+**What worked well today?** 
+- 
+
+**What was challenging?**
+- 
+
+**What did we learn?**
+- 
+
+**What should we keep in mind for next time?**
+- 
+
+**What do we want to bring up with the educator?** 
 - 
 
 --- 
 
-## 5. Inför Checkpoint **Förbered nästa dags reflektion:**
+## 4. Other / Notes 
 - 
-### En sak vi vill visa upp eller diskutera. 
+
+--- 
+
+## 5. Before Checkpoint 
+**Prepare the next day's reflection:**
 - 
-### En fråga eller utmaning vi vill ta upp medutbildaren. 
+### Something we want to show or discuss. 
 - 
-### En sak vi vill förstå bättre eller fördjupa oss i.
+### A question or challenge we want to raise with the educator. 
 - 
+### Something we want to understand better or delve into.
+-
