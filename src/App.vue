@@ -28,4 +28,6 @@ export default {
   </main>
 </template>
 
-<style scoped></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Playwrite+DK+Uloopet:wght@100..400&display=swap');
+</style>
