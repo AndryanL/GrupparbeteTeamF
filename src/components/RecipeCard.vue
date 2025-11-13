@@ -1,5 +1,6 @@
 <script>
 import { getRecipes } from "../MockApiData.js";
+import RatingDisplay from "./RatingDisplay.vue";
 
 export default {
   data() {
@@ -10,9 +11,15 @@ export default {
   props: {
     title: String,
     description: String,
-    rating: Number,
+    rating: {
+      type: Number,
+      required: true,
+    },
     ingredientCount: Number,
     cookTimeMinutes: Number,
+  },
+  components: {
+    RatingDisplay,
   },
 };
 </script>
@@ -27,7 +34,7 @@ export default {
         <h2 class="card-h2">{{ title }}</h2>
         <p>{{ description }}</p>
         <div class="recipe-details">
-          <RatingDisplay>Test</RatingDisplay>
+          <RatingDisplay :rating="rating">Test</RatingDisplay>
           <div class="recipe-overview-short">
             <p>{{ ingredientCount }} ingredients</p>
             <p>{{ cookTimeMinutes }} minutes</p>
