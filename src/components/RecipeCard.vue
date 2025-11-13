@@ -36,8 +36,8 @@ export default {
         <div class="recipe-details">
           <RatingDisplay :rating="rating">Test</RatingDisplay>
           <div class="recipe-overview-short">
-            <p>{{ ingredientCount }} ingredients</p>
-            <p>{{ cookTimeMinutes }} minutes</p>
+            <p>{{ ingredientCount }} ingredienser</p>
+            <p>{{ cookTimeMinutes }} minuter</p>
           </div>
         </div>
       </div>
@@ -52,13 +52,13 @@ export default {
 }
 
 .card-container {
-  width: min(93.5vw, 650px);
+  width: min(93.5vw, 40rem);
   margin: 0.5rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   background-color: var(--color-secondary-mid);
-  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 .card-imagewrapper,
@@ -108,8 +108,9 @@ export default {
 }
 
 .card-h2 {
-  font-family: "Playwrite DK Uloopet", cursive;
+  font-family: "Playwrite DK uloopet", cursive;
   font-size: 1.25rem;
+  font-weight: 400;
   hyphens: manual;
   line-height: 2.5ex;
   padding-bottom: 1.25rem;
