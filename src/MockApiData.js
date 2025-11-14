@@ -2,7 +2,7 @@ export function getRecipes() {
   return [
     {
       id: 0,
-      title: "Kokos\u00ADnötsolja och passions\u00ADfrukt\u00ADkladd\u00ADkaka",
+      title: "Kokos\u00ADolja och passions\u00ADfrukts\u00ADkladd\u00ADkaka",
       description:
         "Denna tropiska kladdkaka kombinerar krämig kokosnötsolja med syrlig passionsfrukt för en exotisk smakupplevelse som tar dig direkt till paradiset.",
       ingredients: [
@@ -55,7 +55,7 @@ export function getRecipes() {
     },
     {
       id: 2,
-      title: "Rökig bacon och lönn\u00ADsirap\u00ADkladd\u00ADkaka",
+      title: "Rökig bacon och lönn\u00ADsiraps\u00ADkladd\u00ADkaka",
       description:
         "En amerikansk klassiker där krispigt rökt bacon möter söt lönnsirap i denna unika kombination av sött och salt som kommer att överraska dina smaklökar.",
       ingredients: [
