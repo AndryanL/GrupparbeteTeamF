@@ -82,13 +82,17 @@ export default {
 <style scoped>
 .star-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .star {
-  margin-inline: 0.15rem;
+  width: 1.25rem;
+  height: auto;
+  margin-inline: 0.2rem;
 }
 
 .rating-number {
   margin-left: 0.25rem;
+  font-family: "Comfortaa", sans-serif;
 }
 </style>
