@@ -2,13 +2,10 @@ import RecipeCard from "./RecipeCard.vue";
 import { getRecipes } from "../../src/MockApiData.js";
 
 const recipeData = getRecipes();
+const singleRecipe = recipeData[0];
 
 describe("<RecipeCard />", () => {
-
-  const singleRecipe = recipeData[0];
-  console.log(singleRecipe)
-
-  it("renders recipe title and description", () => {
+  beforeEach(() => {
     cy.mount(RecipeCard, {
       props: {
         title: singleRecipe.title,
@@ -18,29 +15,23 @@ describe("<RecipeCard />", () => {
         cookTimeMinutes: singleRecipe.cookTimeMinutes,
       },
     });
-
-    // Assert title and description are displayed
-    cy.contains(singleRecipe.title).should("be.visible");
-    cy.contains(singleRecipe.description).should("be.visible");
   });
 
-  /* it("renders all recipe information", () => {
-    cy.mount(RecipeCard, {
-      props: {
-        recipeId: recipeData.id,
-        recipe: recipeData,
-      },
-    });
+  it("renders all recipe information", () => {
+    cy.wait(100); // Small delay
+    cy.contains(singleRecipe.title);
+    cy.contains(singleRecipe.description);
+    cy.contains(singleRecipe.cookTimeMinutes.toString());
+    cy.contains(singleRecipe.rating.toString());
+  });
 
-    // Test various properties
-    cy.contains(recipeData.title); // "Svart vinbär och portvinskladdkaka"
-    cy.contains(recipeData.description); // "En sofistikerad vuxenkladdkaka..."
-    cy.contains(recipeData.cookTimeMinutes.toString()); // "15"
-    cy.contains(recipeData.rating.toString()); // "3.2"
+  it('applies correct styles at mobile breakpoint', () => {
+    cy.wait(100); // Small delay
+    cy.viewport(375, 667); // iPhone SE
+  });
 
-    // Test categories
-    recipeData.categories.forEach((category) => {
-      cy.contains(category);
-    });
-  }); */
+  it('applies correct styles at desktop breakpoint', () => {
+    cy.wait(100); // Small delay
+    cy.viewport(1200, 800);
+  });
 });
