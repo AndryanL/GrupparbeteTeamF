@@ -18,15 +18,24 @@ import "./commands";
 
 import { mount } from "cypress/vue";
 
-Cypress.Commands.add("mount", mount);
+Cypress.Commands.add("mount", (component, options = {}) => {
+	const defaultGlobal = {
+		stubs: {
+			img: true,
+		},
+	};
+
+	const mergedGlobal = Object.assign({}, defaultGlobal, options.global || {});
+
+	return mount(component, {
+		...options,
+		global: mergedGlobal,
+	});
+});
 
 import "../../src/assets/styles/main.css";
 import "../../src/assets/styles/variables.css";
 
-import { createApp } from "vue";
-import App from "../../src/App.vue";
-
-createApp(App).mount("#app");
 
 // Example use:
 // cy.mount(MyComponent)
