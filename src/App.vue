@@ -1,6 +1,7 @@
 <script>
 import { getRecipes } from "./MockApiData.js";
 import RecipeCard from "./components/RecipeCard.vue";
+import ReceptOverview from "./components/ReceptOverview.vue"
 import StepList from "./components/StepList.vue";
 import RatingInput from "./components/RatingInput.vue";
 
