@@ -1,4 +1,4 @@
-# Boiler Room – Daily Log Datum: 2025-11-25
+# Boiler Room – Daily Log Datum: 2025-
 
 ## Group F - Veronica Byström - Maria Gileborn - Andryan Lenander - Victoriia Khrypun ---
 
