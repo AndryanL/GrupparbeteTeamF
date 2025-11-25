@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <div class="card-wrapper">
+    <div class="card-wrapper">
     <div class="card-container">
       <div class="card-imagewrapper">
         <img src="../assets/images/placeholder-image.jpg" :alt="title" />
@@ -43,6 +43,7 @@ export default {
       </div>
     </div>
   </div>
+  
 </template>
 
 <style scoped>
