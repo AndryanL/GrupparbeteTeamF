@@ -43,16 +43,19 @@ export default {
 <template>
   <h1>RECIPE VIEW</h1>
   <div v-if="recipe">
-    <p>
-      test recipe view. Route params id: {{ $route.params.id }}, Recipe.id is
-      {{ this.recipeId }}
-    </p>
     <RecipeCard :recipe="recipe" />
 
-    <!--  <StepList :id="recipe" :steps="recipe.steps"></StepList> -->
-    <!-- <RatingInput></RatingInput> -->
+    <StepList :id="recipe" :steps="recipe.steps"></StepList>
   </div>
   <div v-else>
     <p>Recipe not found</p>
   </div>
 </template>
+
+<style scoped>
+h1 {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+</style>

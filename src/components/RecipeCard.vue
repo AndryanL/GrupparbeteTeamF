@@ -32,7 +32,7 @@ export default {
         <img src="../assets/images/placeholder-image.jpg" :alt="title" />
       </div>
       <div class="card-content">
-        <h2 class="card-h2">{{ recipe == null ? recipe.title : "" }}</h2>
+        <h2 class="card-h2">{{ recipe.title }}</h2>
         <p>{{ recipe.description }}</p>
         <div class="recipe-details">
           <RatingDisplay :rating="recipe.rating">Test</RatingDisplay>

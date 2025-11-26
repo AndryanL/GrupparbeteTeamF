@@ -32,8 +32,14 @@ export default {
 
 <template>
   <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/recipe">Recept</RouterLink>
+    <nav>
+      <RouterLink to="/">
+        <img
+          class="logo"
+          src="./assets/icons/100k_horisontal_bg.svg"
+          alt="100 kladdkakor logo" />
+      </RouterLink>
+    </nav>
   </nav>
   <main>
     <RouterView />
@@ -45,5 +51,16 @@ export default {
 
 body {
   background-color: var(--color-secondary-mid);
+}
+
+.logo {
+  box-shadow: var(--shadow-elevation-medium);
+  margin: 0.5rem;
+  width: 25rem;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: scale(1.025);
 }
 </style>

@@ -15,12 +15,6 @@ export default {
 </script>
 
 <template>
-  <nav>
-    <img
-      class="logo"
-      src="./src/assets/icons/100k_horisontal_bg.svg"
-      alt="100 kladdkakor logo" />
-  </nav>
   <h1>HOME VIEW</h1>
   <div v-for="recipe in recipes" :key="recipe.id" class="container">
     <RecipeCard
@@ -31,9 +25,12 @@ export default {
 </template>
 
 <style scoped>
-.logo {
-  width: 15rem;
+h1 {
+  font-family: "Belanosima", sans-serif;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
+
 .recipe-card {
   display: flex;
   flex-direction: column;
