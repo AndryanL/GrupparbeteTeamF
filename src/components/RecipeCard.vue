@@ -1,5 +1,4 @@
 <script>
-import { getRecipes } from "../MockApiData.js";
 import RatingDisplay from "./RatingDisplay.vue";
 
 export default {
