@@ -1,4 +1,5 @@
 <script>
+import RatingInput from "@/components/RatingInput.vue";
 import { getRecipes } from "../src/MockApiData.js";
 import RecipeCard from "../src/components/RecipeCard.vue";
 import StepList from "../src/components/StepList.vue";
@@ -6,20 +7,35 @@ import StepList from "../src/components/StepList.vue";
 export default {
   data() {
     return {
-      recipes: getRecipes(),
+      recipes: [],
+      recipeId: null,
     };
   },
   components: {
     RecipeCard,
     StepList,
+    RatingInput,
   },
   computed: {
-    recipeId() {
+    /* recipeId() {
       return this.$route.params.id;
-    },
+    }, */
     recipe() {
-      return this.recipes.find((recipe) => recipe.id == this.recipeId);
+      return this.recipes.find((recipe) => recipe.id == this.recipeId) ?? null;
     },
+  },
+  mounted() {
+    this.recipes = getRecipes();
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params.id,
+      (newId, oldId) => {
+        console.log("route updated Id: " + newId);
+        this.recipeId = newId;
+      },
+      { immediate: true }
+    );
   },
 };
 </script>
@@ -29,18 +45,12 @@ export default {
   <div v-if="recipe">
     <p>
       test recipe view. Route params id: {{ $route.params.id }}, Recipe.id is
-      {{ recipe.id }}
+      {{ this.recipeId }}
     </p>
-    <RecipeCard
-      :id="recipe"
-      :title="recipe.title"
-      :description="recipe.description"
-      :ingredientCount="recipe.ingredients.length"
-      :cookTimeMinutes="recipe.cookTimeMinutes"
-      :rating="recipe.rating">
-    </RecipeCard>
+    <RecipeCard :recipe="recipe" />
 
-    <StepList :id="recipe" :steps="recipe.steps"></StepList>
+    <!--  <StepList :id="recipe" :steps="recipe.steps"></StepList> -->
+    <!-- <RatingInput></RatingInput> -->
   </div>
   <div v-else>
     <p>Recipe not found</p>
