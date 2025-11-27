@@ -2,19 +2,22 @@
 import RatingDisplay from "./RatingDisplay.vue";
 
 export default {
-  props: {
-    id: {
-      type: Number,
-      required: true,
+  data() {
+    return {};
+  },
+  props: ["recipe"],
+  //{
+  //   recipe: {
+  //     type: Object,
+  //     default(rawProps) {
+  //       return null;
+  //     },
+  //   },
+  // },
+  computed: {
+    isLoaded() {
+      return this.recipe != null;
     },
-    title: String,
-    description: String,
-    rating: {
-      type: Number,
-      required: true,
-    },
-    ingredientCount: Number,
-    cookTimeMinutes: Number,
   },
   components: {
     RatingDisplay,
@@ -23,19 +26,19 @@ export default {
 </script>
 
 <template>
-  <div class="card-wrapper">
+  <div v-if="isLoaded" class="card-wrapper">
     <div class="card-container">
       <div class="card-imagewrapper">
         <img src="../assets/images/placeholder-image.jpg" :alt="title" />
       </div>
       <div class="card-content">
-        <h2 class="card-h2">{{ title }}</h2>
-        <p>{{ description }}</p>
+        <h2 class="card-h2">{{ recipe.title }}</h2>
+        <p>{{ recipe.description }}</p>
         <div class="recipe-details">
-          <RatingDisplay :rating="rating">Test</RatingDisplay>
+          <RatingDisplay :rating="recipe.rating">Test</RatingDisplay>
           <div class="recipe-overview-short">
-            <p>{{ ingredientCount }} ingredienser</p>
-            <p>{{ cookTimeMinutes }} minuter</p>
+            <p>{{ recipe.ingredients.length }} ingredienser</p>
+            <p>{{ recipe.cookTimeMinutes }} minuter</p>
           </div>
         </div>
       </div>
@@ -57,6 +60,12 @@ export default {
   flex-direction: column;
   background-color: var(--color-secondary-mid);
   box-shadow: var(--shadow-elevation-medium);
+  transition: transform 0.2s;
+}
+
+.card-container:hover {
+  transform: scale(1.025);
+  cursor: pointer;
 }
 
 .card-imagewrapper,
