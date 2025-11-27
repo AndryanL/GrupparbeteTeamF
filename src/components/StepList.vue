@@ -1,6 +1,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     steps: {
       type: Array,
       required: true,

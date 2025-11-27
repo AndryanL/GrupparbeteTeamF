@@ -1,16 +1,16 @@
 <script>
-import  {RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 import { getRecipes } from "./MockApiData.js";
 import RecipeCard from "./components/RecipeCard.vue";
-import ReceptOverview from "./components/ReceptOverview.vue"
+import ReceptOverview from "./components/ReceptOverview.vue";
 import StepList from "./components/StepList.vue";
 import RatingInput from "./components/RatingInput.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     RouterLink,
-    RouterView
+    RouterView,
   },
   data() {
     return {
@@ -36,22 +36,8 @@ export default {
     <RouterLink to="/recipe">Recept</RouterLink>
   </nav>
   <main>
-    <div v-for="recipe in recipes" :key="recipe.id">
-      <RecipeCard
-        :title="recipe.title"
-        :description="recipe.description"
-        :ingredientCount="recipe.ingredients.length"
-        :cookTimeMinutes="recipe.cookTimeMinutes"
-        :rating="recipe.rating"></RecipeCard>
-    </div>
-
-    <div v-for="step in steps" :key="step">
-      <StepList :steps="steps" />
-    </div>
-    <RatingInput />
+    <RouterView />
   </main>
-
-  <RouterView />
 </template>
 
 <style scoped>
