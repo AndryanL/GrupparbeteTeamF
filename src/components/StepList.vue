@@ -2,10 +2,10 @@
 export default {
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true,
     },
-    steps: {
+    instructions: {
       type: Array,
       required: true,
     },
@@ -15,8 +15,8 @@ export default {
 
 <template>
   <ol>
-    <li v-for="(step, index) in steps" :key="index">
-      {{ step }}
+    <li v-for="(instruction, id) in instructions" :key="id">
+      {{ instruction }}
     </li>
   </ol>
 </template>
