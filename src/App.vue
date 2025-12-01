@@ -5,27 +5,25 @@ import RecipeCard from "./components/RecipeCard.vue";
 import ReceptOverview from "./components/ReceptOverview.vue";
 import StepList from "./components/StepList.vue";
 import RatingInput from "./components/RatingInput.vue";
+import Comment from "@/components/Comment.vue";
+import { getData } from "./apiFunctions.js";
 
 export default {
   name: "App",
-  components: {
-    RouterLink,
-    RouterView,
-  },
   data() {
     return {
-      recipes: getRecipes(),
-      steps: [
-        "Preheat the oven to 350°F (175°C).",
-        "Mix flour and sugar in a bowl.",
-        "Bake for 30 minutes.",
-      ],
+      recipes: getData(
+        "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
+      ),
     };
   },
   components: {
+    RouterLink,
+    RouterView,
     RecipeCard,
     StepList,
     RatingInput,
+    Comment,
   },
 };
 </script>

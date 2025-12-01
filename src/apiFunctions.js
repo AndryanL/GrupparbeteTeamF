@@ -1,6 +1,10 @@
 import fs from "fs";
 
 export async function getData(apiUrl) {
+  console.log("Get data from:", apiUrl);
+  if (apiUrl == "" || apiUrl == undefined || apiUrl == null) {
+    throw new Error("apiUrl is not defined");
+  }
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
@@ -9,6 +13,21 @@ export async function getData(apiUrl) {
     const recipes = await response.json();
     console.log("Recipe Data:", recipes);
     return recipes;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+export async function getComments(apiUrl) {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const comments = await response.json();
+    console.log("Comment Data:", comments);
+    return comments;
   } catch (error) {
     console.error("Error:", error);
     throw error;
