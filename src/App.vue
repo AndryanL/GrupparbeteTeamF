@@ -35,7 +35,8 @@ export default {
         <img
           class="logo"
           src="./assets/icons/100k_horisontal_bg.svg"
-          alt="100 kladdkakor logo" />
+          alt="100 kladdkakor logo"
+        />
       </RouterLink>
     </nav>
   </nav>
