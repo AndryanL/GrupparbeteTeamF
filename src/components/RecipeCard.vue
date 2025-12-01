@@ -21,7 +21,7 @@ export default {
   <div v-if="isLoaded" class="card-wrapper">
     <div class="card-container">
       <div class="card-imagewrapper">
-        <img :src="recipe.imageUrl" :alt="title" />
+        <img :src="recipe.imageUrl" :alt="recipe.title" />
       </div>
       <div class="card-content">
         <h2 class="card-h2">{{ recipe.title }}</h2>
