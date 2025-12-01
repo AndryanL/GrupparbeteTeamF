@@ -46,7 +46,7 @@ export default {
 
 .card-container {
   width: min(93.5vw, 40rem);
-  margin: 0.5rem;
+  margin-block: 0.5rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;

@@ -68,10 +68,10 @@ export default {
 
 <style scoped>
 .comment-card {
-  background: #ffc2ca;
-  border-radius: 16px;
-  margin: 12px;
-  padding: 13px 26px;
+  background: var(--color-secondary-mid);
+  border-radius: 0.5rem;
+  margin-block: 0.75rem;
+  padding: 0.75rem 2rem;
 }
 .comment-header {
   display: flex;
