@@ -3,6 +3,7 @@ import RatingInput from "@/components/RatingInput.vue";
 import { getData } from "../src/apiFunctions.js"
 import RecipeCard from "../src/components/RecipeCard.vue";
 import StepList from "../src/components/StepList.vue";
+import Comment from "@/components/Comment.vue";
 
 export default {
   data() {
@@ -16,6 +17,7 @@ export default {
     RecipeCard,
     StepList,
     RatingInput,
+    Comment,
   },
   computed: {
     recipeId() {
@@ -66,6 +68,7 @@ export default {
   <div v-else-if="recipe">
     <RecipeCard :recipe="recipe" />
     <StepList :id="recipe.id" :instructions="recipe.instructions"></StepList>
+    <Comments :recipe-id="RecipeId" />
   </div>
   <div v-else>
     <p>Recipe not found</p>
