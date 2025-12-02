@@ -2,7 +2,7 @@
   <h1>Kategorier</h1>
   <ul class="icon-list">
     <li v-for="category in categories" :key="category">
-      <img class="icon" src="@/assets/rating.svg" alt="">
+      <img class="icon" src="@/assets/rating.svg" alt="" />
       {{ category }}
     </li>
   </ul>
@@ -10,10 +10,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      categories: ["Klassiska", "Glutenfria", "Med bär", "Veganska"]
-    };
+  props: {
+    categories: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>
@@ -22,18 +23,13 @@ export default {
 h1 {
   font-family: "Playwrite DK Uloopet", cursive;
   font-size: 32px;
-  color: #654434;
+  color: black;
   margin-bottom: 16px;
 }
 
-/* ADD THIS — styles for icon layout */
 .icon-list {
   list-style: none;
   padding: 0;
-  margin: 0;
-}
-
-.icon-list li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -41,7 +37,7 @@ h1 {
 }
 
 .icon {
-  width: 10px; 
+  width: 10px;
   height: 10px;
 }
 </style>
