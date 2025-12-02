@@ -6,7 +6,7 @@ import StepList from "../src/components/StepList.vue";
 import Comment from "@/components/Comment.vue";
 import IngredientList from "@/components/IngredientList.vue";
 import ReceptOverview from "@/components/ReceptOverview.vue";
-
+import Category from "@/components/Category.vue";
 export default {
   data() {
     return {
@@ -71,7 +71,6 @@ export default {
   },
 };
 </script>
-
 <template>
   <div class="wrapper">
     <div class="flex-container">
@@ -105,26 +104,22 @@ export default {
     </div>
   </div>
 </template>
-
 <style scoped>
 h1 {
   font-family: "Belanosima", sans-serif;
   font-weight: 600;
   margin-left: 0.5rem;
 }
-
 h2 {
   font-family: "Playwrite Dk Uloopet";
   color: var(--color-primary-light);
 }
-
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
-
 .flex-container {
   width: min(93.5vw, 768px);
   display: flex;
@@ -135,7 +130,6 @@ h2 {
 .flex-container > * {
   width: 100%;
 }
-
 .comment-container {
   background-color: var(--color-primary);
   padding-block: 2.5rem;
@@ -154,7 +148,6 @@ h2 {
   max-width: min(93.5vw, 768px);
   margin: 0 auto;
 }
-
 .error {
   color: red;
   padding: 1rem;
