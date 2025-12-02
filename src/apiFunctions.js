@@ -61,6 +61,30 @@ export async function postData(apiUrl, data) {
     });
 }
 
+export async function postRating(apiUrl, data) {
+  console.log(data);
+  fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(
+          `HTTP error, status: ${response.status} - ${response.statusText}`
+        );
+      }
+      console.log("Rating submitted successfully. Score: " + data);
+    })
+    .catch((error) => {
+      console.log(error);
+      console.error("Error:", error.message);
+    });
+}
+
 export async function patchData(apiUrl, data) {
   fetch(apiUrl, {
     method: "PATCH",
