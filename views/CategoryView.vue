@@ -7,7 +7,7 @@ import Category from "@/components/Category.vue";
 export default {
   data() {
     return {
-      recipes: [], // Initialize as empty array
+      recipes: [], 
       filteredRecipes: [],
       loading: false,
       error: null,
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <template>
-  <h1>HOME VIEW</h1>
+  <h1>Category View</h1>
   <SearchBar @search="searchResult" />
   <div v-if="loading">Loading recipes...</div>
   <div v-else-if="error" class="error">{{ error }}</div>
@@ -75,9 +75,7 @@ export default {
       </div>
     </div>
   </div>
-  <div><category class="category-card"
-          @click="$router.push({ name: 'category', params: { id: category.id } })"
-          :category="category"></category></div>
+  <category/>
 </template>
 
 <style scoped>
