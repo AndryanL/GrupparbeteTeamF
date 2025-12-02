@@ -1,22 +1,15 @@
 <script>
-import { getRecipes } from "../MockApiData.js";
 import RatingDisplay from "./RatingDisplay.vue";
 
 export default {
   data() {
-    return {
-      recipes: getRecipes(),
-    };
+    return {};
   },
-  props: {
-    title: String,
-    description: String,
-    rating: {
-      type: Number,
-      required: true,
+  props: ["recipe"],
+  computed: {
+    isLoaded() {
+      return this.recipe != null;
     },
-    ingredientCount: Number,
-    cookTimeMinutes: Number,
   },
   components: {
     RatingDisplay,
@@ -25,25 +18,24 @@ export default {
 </script>
 
 <template>
-    <div class="card-wrapper">
+  <div v-if="isLoaded" class="card-wrapper">
     <div class="card-container">
       <div class="card-imagewrapper">
-        <img src="../assets/images/placeholder-image.jpg" :alt="title" />
+        <img :src="recipe.imageUrl" :alt="recipe.title" />
       </div>
       <div class="card-content">
-        <h2 class="card-h2">{{ title }}</h2>
-        <p>{{ description }}</p>
+        <h2 class="card-h2">{{ recipe.title }}</h2>
+        <p>{{ recipe.description }}</p>
         <div class="recipe-details">
-          <RatingDisplay :rating="rating">Test</RatingDisplay>
+          <RatingDisplay :ratings="recipe.ratings"></RatingDisplay>
           <div class="recipe-overview-short">
-            <p>{{ ingredientCount }} ingredienser</p>
-            <p>{{ cookTimeMinutes }} minuter</p>
+            <p>{{ recipe.ingredients.length }} ingredienser</p>
+            <p>{{ recipe.timeInMins }} minuter</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 </template>
 
 <style scoped>
@@ -54,12 +46,22 @@ export default {
 
 .card-container {
   width: min(93.5vw, 40rem);
-  margin: 0.5rem;
+  margin-block: 0.5rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   background-color: var(--color-secondary-mid);
   box-shadow: var(--shadow-elevation-medium);
+  transition: transform 0.2s;
+}
+
+.card-container:hover {
+  transform: scale(1.025);
+  cursor: pointer;
+}
+
+.card-imagewrapper {
+  aspect-ratio: 4 / 3;
 }
 
 .card-imagewrapper,
@@ -120,6 +122,10 @@ export default {
 @container recipe-card (min-width: 600px) {
   .card-container {
     flex-direction: row;
+  }
+
+  .card-imagewrapper {
+    aspect-ratio: 1 / 1;
   }
 
   .card-imagewrapper,

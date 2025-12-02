@@ -1,57 +1,48 @@
 <script>
-import  {RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 import { getRecipes } from "./MockApiData.js";
 import RecipeCard from "./components/RecipeCard.vue";
-import ReceptOverview from "./components/ReceptOverview.vue"
+import ReceptOverview from "./components/ReceptOverview.vue";
 import StepList from "./components/StepList.vue";
 import RatingInput from "./components/RatingInput.vue";
+import Comment from "@/components/Comment.vue";
+import { getData } from "./apiFunctions.js";
 
 export default {
-  name: 'App',
-  components: {
-    RouterLink,
-    RouterView
-  },
+  name: "App",
   data() {
     return {
-      recipes: getRecipes(),
-      steps: [
-        "Preheat the oven to 350°F (175°C).",
-        "Mix flour and sugar in a bowl.",
-        "Bake for 30 minutes.",
-      ],
+      recipes: getData(
+        "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
+      ),
     };
   },
   components: {
+    RouterLink,
+    RouterView,
     RecipeCard,
     StepList,
     RatingInput,
+    Comment,
   },
 };
 </script>
 
 <template>
   <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/recipe">Recept</RouterLink>
+    <nav>
+      <RouterLink to="/">
+        <img
+          class="logo"
+          src="./assets/icons/100k_horisontal_bg.svg"
+          alt="100 kladdkakor logo"
+        />
+      </RouterLink>
+    </nav>
   </nav>
   <main>
-    <div v-for="recipe in recipes" :key="recipe.id">
-      <RecipeCard
-        :title="recipe.title"
-        :description="recipe.description"
-        :ingredientCount="recipe.ingredients.length"
-        :cookTimeMinutes="recipe.cookTimeMinutes"
-        :rating="recipe.rating"></RecipeCard>
-    </div>
-
-    <div v-for="step in steps" :key="step">
-      <StepList :steps="steps" />
-    </div>
-    <RatingInput />
+    <RouterView />
   </main>
-
-  <RouterView />
 </template>
 
 <style scoped>
@@ -59,5 +50,16 @@ export default {
 
 body {
   background-color: var(--color-secondary-mid);
+}
+
+.logo {
+  box-shadow: var(--shadow-elevation-medium);
+  margin: 0.5rem;
+  width: 25rem;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: scale(1.025);
 }
 </style>
