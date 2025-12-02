@@ -156,6 +156,34 @@ export async function deleteAllRecipes(apiUrl) {
   }
 }
 
+export async function deleteAllCategories(apiUrl) {
+  try {
+    console.log("Hämtar kategorier från Api...");
+    const categories = await getData(apiUrl);
+
+    const categoryIds = categories.map((category) => category.id);
+    console.log(`Hittade ${categoryIds.length} kategorier`);
+    console.log("Kategori-ids:" + categoryIds);
+
+    console.log("Tar bort recepten från Api..");
+    for (const categoryId of categoryIds) {
+      try {
+        await deleteData(`${apiUrl}/${categoryId}`);
+        console.log(`✓ Kategorier med id: ${categoryId} borttaget!`);
+      } catch (error) {
+        console.error(
+          `✗ Lyckades inte ta bort kategorier med id: ${categoryId}:`,
+          error.message
+        );
+      }
+    }
+
+    console.log("Alla recept borttagna");
+  } catch (error) {
+    console.error("Något gick fel under borrtagningsprocessen", error);
+  }
+}
+
 export async function postRecipesFromJSON(apiUrl, jsonFilePath) {
   try {
     console.log("Loading recipes from JSON file...");
