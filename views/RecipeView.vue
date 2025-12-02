@@ -5,7 +5,8 @@ import RecipeCard from "../src/components/RecipeCard.vue";
 import StepList from "../src/components/StepList.vue";
 import Comment from "@/components/Comment.vue";
 import IngredientList from "@/components/IngredientList.vue";
-
+import ReceptOverview from "@/components/ReceptOverview.vue";
+import Category from "@/components/Category.vue";
 export default {
     data() {
         return {
@@ -20,6 +21,8 @@ export default {
         RatingInput,
         Comment,
         IngredientList,
+        ReceptOverview,
+        Category,
     },
     computed: {
         recipeId() {
@@ -59,7 +62,6 @@ export default {
     },
     async created() {
         await this.loadRecipes();
-
         this.$watch(
             () => this.$route.params.id,
             (newId) => {
@@ -70,7 +72,6 @@ export default {
     },
 };
 </script>
-
 <template>
     <div class="wrapper">
         <div class="flex-container">
@@ -79,13 +80,10 @@ export default {
             <div v-else-if="error" class="error">{{ error }}</div>
             <div v-else-if="recipe">
                 <RecipeCard :recipe="recipe" />
-
                 <section>
                     <h2>Ingredienser</h2>
                     <IngredientList :ingredients="recipe.ingredients" />
                 </section>
-
-
                 <StepList :id="recipe.id" :instructions="recipe.instructions"></StepList>
                 <div class="comment-container">
                     <h2>Kommentarer</h2>
@@ -98,37 +96,31 @@ export default {
         </div>
     </div>
 </template>
-
 <style scoped>
 h1 {
     font-family: "Belanosima", sans-serif;
     font-weight: 600;
     margin-left: 0.5rem;
 }
-
 h2 {
     font-family: "Playwrite Dk Uloopet";
     color: var(--color-primary-light);
 }
-
 .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-
 .flex-container {
     width: min(93.5vw, 768px);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .flex-container>* {
     width: 100%;
 }
-
 .comment-container {
     background-color: var(--color-primary);
     padding-block: 2.5rem;
@@ -142,12 +134,10 @@ h2 {
     padding-left: calc(50vw - 50%);
     padding-right: calc(50vw - 50%);
 }
-
 .comment-container>* {
     max-width: min(93.5vw, 768px);
     margin: 0 auto;
 }
-
 .error {
     color: red;
     padding: 1rem;
