@@ -2,10 +2,10 @@
 export default {
   props: {
     id: {
-      type: Number,
+      type: String,
       required: true,
     },
-    steps: {
+    instructions: {
       type: Array,
       required: true,
     },
@@ -15,17 +15,20 @@ export default {
 
 <template>
   <ol>
-    <li v-for="(step, index) in steps" :key="index">
-      {{ step }}
+    <li v-for="(instruction, id) in instructions" :key="id">
+      {{ instruction }}
     </li>
   </ol>
 </template>
 
 <style scoped>
+ol {
+  padding-left: 0;
+}
 li {
   font-family: "Comfortaa";
-  margin: 12px;
-  padding: 13px 26px 13px 26px;
+  margin-block: 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
   color: #31180c;
   background-color: var(--color-tertiary);

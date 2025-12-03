@@ -6,14 +6,6 @@ export default {
     return {};
   },
   props: ["recipe"],
-  //{
-  //   recipe: {
-  //     type: Object,
-  //     default(rawProps) {
-  //       return null;
-  //     },
-  //   },
-  // },
   computed: {
     isLoaded() {
       return this.recipe != null;
@@ -29,16 +21,16 @@ export default {
   <div v-if="isLoaded" class="card-wrapper">
     <div class="card-container">
       <div class="card-imagewrapper">
-        <img src="../assets/images/placeholder-image.jpg" :alt="title" />
+        <img :src="recipe.imageUrl" :alt="recipe.title" />
       </div>
       <div class="card-content">
         <h2 class="card-h2">{{ recipe.title }}</h2>
         <p>{{ recipe.description }}</p>
         <div class="recipe-details">
-          <RatingDisplay :rating="recipe.rating">Test</RatingDisplay>
+          <RatingDisplay :ratings="recipe.ratings"></RatingDisplay>
           <div class="recipe-overview-short">
             <p>{{ recipe.ingredients.length }} ingredienser</p>
-            <p>{{ recipe.cookTimeMinutes }} minuter</p>
+            <p>{{ recipe.timeInMins }} minuter</p>
           </div>
         </div>
       </div>
@@ -54,7 +46,7 @@ export default {
 
 .card-container {
   width: min(93.5vw, 40rem);
-  margin: 0.5rem;
+  margin-block: 0.5rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -66,6 +58,10 @@ export default {
 .card-container:hover {
   transform: scale(1.025);
   cursor: pointer;
+}
+
+.card-imagewrapper {
+  aspect-ratio: 4 / 3;
 }
 
 .card-imagewrapper,
@@ -126,6 +122,10 @@ export default {
 @container recipe-card (min-width: 600px) {
   .card-container {
     flex-direction: row;
+  }
+
+  .card-imagewrapper {
+    aspect-ratio: 1 / 1;
   }
 
   .card-imagewrapper,

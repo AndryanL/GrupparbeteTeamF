@@ -1,4 +1,4 @@
-import { deleteData } from "./apiFunctions.js";
+import { postRecipesFromJSON } from "./apiFunctions.js";
 
 /*Example JSON-data from API: 
   {
@@ -18,7 +18,7 @@ import { deleteData } from "./apiFunctions.js";
   ratings: [],
   } */
 
-const jsonData = {
+/* const jsonData = {
   title: "Kokos\u00ADolja och passions\u00ADfrukts\u00ADkladd\u00ADkaka",
   description:
     "Denna tropiska kladdkaka kombinerar krämig kokosnötsolja med syrlig passionsfrukt för en exotisk smakupplevelse som tar dig direkt till paradiset.",
@@ -67,7 +67,7 @@ const jsonData = {
     },
   ],
   ratings: [3],
-};
+}; */
 
 /* getData(
   "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
@@ -78,6 +78,19 @@ const jsonData = {
   jsonData
 ); */
 
-deleteData(
+/* deleteData(
   "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes/ada5af13-9aa5-48b5-ac62-0567680aced6"
+); */
+
+/* deleteAllRecipes(
+  "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
+); */
+
+postRecipesFromJSON(
+  "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes",
+  "./recipes.json"
 );
+
+/* deleteAllCategories(
+  "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/categories"
+); */
