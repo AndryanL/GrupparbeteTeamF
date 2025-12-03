@@ -1,5 +1,8 @@
 <template>
-  <button class="knapp" @click="handleClick">Slumpa ett recept!</button>
+  <button class="knapp" v-on:click ="goToRandom">
+    Randon recept
+  </button>
+  <!-- <RandomButton :recipes="recipes" /> -->
 </template>
 
 <script>

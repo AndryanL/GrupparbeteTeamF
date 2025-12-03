@@ -1,18 +1,17 @@
 <template>
-    <button class="knapp" v-on:click = "handleClick">Knapp</button>
+  <button class="knapp" v-on:click="$emit('click')">
+    {{ text }}
+  </button>
 </template>
 
-<script>
-    export default {
-        methods: {
-            handleClick() {
-                alert('clicked')
-            }
-        }
-}
+<script setup>
+import { defineProps } from 'vue';
 
-
+defineProps({
+  text: String
+});
 </script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap');
@@ -31,4 +30,9 @@
         font-weight: 400;
         font-style: normal;
     }
+
+    .knapp:hover {
+        transform: scale(1.025);
+    }
+
 </style>

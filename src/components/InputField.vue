@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Search input -->
+   
     <fieldset>
       <input
         class="inputField" 
@@ -11,7 +11,7 @@
       />
     </fieldset>
 
-    <!-- Display results -->
+    
     <div v-if="recipes.length">
       <h3>Search Results:</h3>
       <ul>
@@ -24,11 +24,11 @@
 <script setup>
 import { ref } from 'vue'
 
-const searchQuery = ref('')   // VUE переменная для ввода
-const recipes = ref([])       // массив найденных рецептов
-const UrlAPI = 'lalala';              // адресс для API
+const searchQuery = ref('')   
+const recipes = ref([])
+const UrlAPI = 'url';
 
-// Простая функция дебаунса
+
 function debounce(fn, delay) {
   let timeout
   return (...args) => {
@@ -37,25 +37,24 @@ function debounce(fn, delay) {
   }
 }
 
-// Функция поиска через fetch
+
 async function handleSearch() {
-  // Если поле пустое, очищаем результаты
+
   if (!searchQuery.value) {
     recipes.value = []
     return
   }
 
   try {
-    // Отправляем GET-запрос на ваш API
+    
     const response = await fetch(`${UrlAPI}?query=${encodeURIComponent(searchQuery.value)}`)
     
-    // Проверка, что ответ успешный
-    if (!response.ok) throw new Error('Ошибка при получении данных с API')
+    
+    if (!response.ok) throw new Error('Errooor')
 
-    // Парсим JSON
     const data = await response.json()
 
-    // Сохраняем результаты (предположим, что API возвращает объект с массивом results)
+    
     recipes.value = data.results || []
   } catch (error) {
     console.error('Fetch error:', error)
@@ -63,7 +62,7 @@ async function handleSearch() {
   }
 }
 
-// Создаем "дебаунс" версию функции поиска
+
 const debouncedSearch = debounce(handleSearch, 400)
 </script>
 
