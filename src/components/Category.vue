@@ -1,57 +1,59 @@
 <script>
-
-import iconUrl from '@/assets/images/bullet-point.svg'
+import iconUrl from "@/assets/images/bullet-point.svg";
 export default {
   name: "Category",
   props: {
     categories: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     showViewAll: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     goToCategoryView(categoryId) {
-      this.$router.push({ name: 'category', params: { id: categoryId } });
+      this.$router.push({ name: "category", params: { id: categoryId } });
     },
     goToAllCategories() {
-      this.$router.push({ name: 'category' });
-    }
+      this.$router.push({ name: "category" });
+    },
   },
   data() {
     return {
-      iconUrl
-    }
-  }
-}
+      iconUrl,
+    };
+  },
+};
 </script>
 
 <template>
-
-  <div class="category-card">
+  <aside class="category-card">
     <h2 class="category-title">Kategorier</h2>
     <ul>
-      <li v-for="category in categories" :key="category.id" @click="goToCategoryView(category.id)">
+      <li
+        v-for="category in categories"
+        :key="category.id"
+        @click="goToCategoryView(category.id)">
         <img :src="iconUrl" alt="kladdkakaikon" class="kladdkaka-icon" />
         <span class="category-text">{{ category.name }}</span>
       </li>
     </ul>
-    <button v-if="showViewAll" @click="goToAllCategories" class="view-all-btn">Visa alla kategorier</button>
-  </div>
+    <button v-if="showViewAll" @click="goToAllCategories" class="view-all-btn">
+      Visa alla kategorier
+    </button>
+  </aside>
 </template>
 
 <style scoped>
 .category-card {
-  background: #FFC2CA;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #ffc2ca;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-elevation-low);
   padding: 0.75rem 0.75rem;
   font-family: "Playwrite DK Uloopet", cursive;
-  width: fit-content;
-  max-width: 200px;
+  width: min(93.5vw, 40rem);
 }
 
 .category-title {
@@ -106,10 +108,16 @@ li:hover {
   cursor: pointer;
   transition: all 0.2s ease;
 }
- 
 
 .view-all-btn:hover {
   background-color: rgba(255, 255, 255, 0.4);
   transform: translateX(2px);
+}
+
+@media screen and (min-width: 992px) {
+  .category-card {
+    max-width: 13rem;
+    margin: 0.5rem;
+  }
 }
 </style>

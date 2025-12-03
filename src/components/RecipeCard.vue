@@ -39,25 +39,21 @@ export default {
 </template>
 
 <style scoped>
-.card-wrapper {
-  container-type: inline-size;
-  container-name: recipe-card;
-}
-
 .card-container {
   width: min(93.5vw, 40rem);
-  margin-block: 0.5rem;
+  margin: 0.5rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   background-color: var(--color-secondary-mid);
-  box-shadow: var(--shadow-elevation-medium);
-  transition: transform 0.2s;
+  box-shadow: var(--shadow-elevation-low);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card-container:hover {
   transform: scale(1.025);
   cursor: pointer;
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 .card-imagewrapper {
@@ -119,7 +115,7 @@ export default {
   padding-bottom: 1.25rem;
 }
 
-@container recipe-card (min-width: 600px) {
+@media screen and (min-width: 600px) {
   .card-container {
     flex-direction: row;
   }

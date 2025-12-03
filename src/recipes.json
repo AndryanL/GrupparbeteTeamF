@@ -4,7 +4,7 @@
       "description": "Denna tropiska kladdkaka kombinerar krämig kokosnötsolja med syrlig passionsfrukt för en exotisk smakupplevelse som tar dig direkt till paradiset.",
       "imageUrl": "https://i.ibb.co/rfRmKFN8/100k-passionfruit.webp",
       "timeInMins": 15,
-      "categories": ["Tropiska kladdkakor", "Veganska kladdkakor"],
+      "categories": ["Frukt/bärkladdkakor", "Söta kladdkakor"],
       "instructions": [
         "Sätt ugnen på 175°C",
         "Smält kokosnötsoljan",
@@ -29,7 +29,7 @@
       "description": "Denna asiatiskt inspirerade kladdkaka erbjuder en perfekt balans mellan het wasabi och nötig sesam för en oförglömlig kulinarisk upplevelse.",
       "imageUrl": "https://i.ibb.co/27ybf6nL/100k-wasabi.webp",
       "timeInMins": 15,
-      "categories": ["Asiatiska kladdkakor", "Kryddstarka kladdkakor"],
+      "categories": ["Experimentella kladdkakor", "Starka kladdkakor"],
       "instructions": [
         "Sätt ugnen på 175°C",
         "Smält smör med sesamolja",
@@ -55,7 +55,7 @@
       "description": "En amerikansk klassiker där krispigt rökt bacon möter söt lönnsirap i denna unika kombination av sött och salt som kommer att överraska dina smaklökar.",
       "imageUrl": "https://i.ibb.co/bjf7rppM/100k-bacon.webp",
       "timeInMins": 15,
-      "categories": ["Söta och salta kladdkakor", "Amerikanska kladdkakor"],
+      "categories": ["Experimentella kladdkakor", "Söta kladdkakor"],
       "instructions": [
         "Sätt ugnen på 175°C",
         "Stek bacon tills det är krispigt",
@@ -80,7 +80,7 @@
       "description": "Denna lyxiga italienska kladdkaka kombinerar exklusiv saffran med krämiga pinjenötter och frisk apelsin för en sofistikerad efterrätten.",
       "imageUrl": "https://i.ibb.co/Mkg5cjKc/100k-saffron.webp",
       "timeInMins": 15,
-      "categories": ["Lyxiga kladdkakor", "Italienska kladdkakor"],
+      "categories": ["Lyxkladdkakor"],
       "instructions": [
         "Sätt ugnen på 170°C",
         "Mortla saffran med 1 msk varmt vatten",
@@ -107,7 +107,7 @@
       "description": "En festlig mexikansk kladdkaka där stark tequila och syrlig lime skapar en fräsch och spännande smakkombination som perfekt passar till kalas.",
       "imageUrl": "https://i.ibb.co/hRm3dkGz/100k-tequila.webp",
       "timeInMins": 15,
-      "categories": ["Alkoholhaltiga kladdkakor", "Mexikanska kladdkakor"],
+      "categories": ["Experimentella kladdkakor", "Lyxkladdkakor"],
       "instructions": [
         "Sätt ugnen på 170°C",
         "Smält smöret",
@@ -132,7 +132,7 @@
       "description": "Denna skonsamma veganska variant använder havredryck för att skapa en mjuk och fuktig kladdkaka som är perfekt för den mjölkfria dieten.",
       "imageUrl": "https://i.ibb.co/fzm8S5wy/100k-oatmilk.webp",
       "timeInMins": 15,
-      "categories": ["Mjölkfria kladdkakor", "Veganska kladdkakor"],
+      "categories": ["Veganska kladdkakor", "Söta kladdkakor"],
       "instructions": [
         "Sätt ugnen på 175°C",
         "Smält veganskt smör",
@@ -157,7 +157,7 @@
       "description": "En överraskande nyttig kladdkaka där finkornig zucchini ger fantastisk fuktighet till den rika chokladsmaken utan att synas.",
       "imageUrl": "https://i.ibb.co/b5fNXwMx/100k-zucchini.webp",
       "timeInMins": 15,
-      "categories": ["Grönsakskladdkakor", "Nyttiga kladdkakor"],
+      "categories": ["Experimentella kladdkakor"],
       "instructions": [
         "Sätt ugnen på 175°C",
         "Riv zucchinin och låt rinna av",
@@ -183,7 +183,7 @@
       "description": "Denna unika kladdkaka kombinerar krispiga popcorn med söt karamell för en rolig texturmässig överraskning i varje tugga.",
       "imageUrl": "https://i.ibb.co/rGm0W0mQ/100k-popcorn.webp",
       "timeInMins": 15,
-      "categories": ["Krispiga kladdkakor", "Karamellkladdkakor"],
+      "categories": ["Experimentella kladdkakor", "Söta kladdkakor"],
       "instructions": [
         "Sätt ugnen på 170°C",
         "Gör popcorn och krossa lätt",
@@ -209,7 +209,7 @@
       "description": "En spansk inspirerad kladdkaka med nötig manchegoost och rökig paprika som skapar en komplex och minnesvärd smakupplevelse.",
       "imageUrl": "https://i.ibb.co/cSv5HgP9/100k-paprika.webp",
       "timeInMins": 15,
-      "categories": ["Spanska kladdkakor", "Ostkladdkakor"],
+      "categories": ["Experimentella kladdkakor", "Starka kladdkakor"],
       "instructions": [
         "Sätt ugnen på 165°C",
         "Riv osten grovt",
@@ -235,7 +235,7 @@
       "description": "En sofistikerad vuxenkladdkaka där syrliga svarta vinbär och mustigt portvin skapar en djup och fruktig smakprofil.",
       "imageUrl": "https://i.ibb.co/ksVS3TLp/100k-blackcurrant.webp",
       "timeInMins": 15,
-      "categories": ["Vuxna kladdkakor", "Bärkladdkakor"],
+      "categories": ["Lyxkladdkakor", "Frukt/bärkladdkakor"],
       "instructions": [
         "Sätt ugnen på 170°C",
         "Smält smöret",

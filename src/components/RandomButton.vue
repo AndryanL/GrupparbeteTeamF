@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style>
-/* Your existing styles remain the same */
 @import url("https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
 
 .knapp {

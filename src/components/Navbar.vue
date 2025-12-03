@@ -14,11 +14,8 @@ export default {
       <img
         class="logo"
         src="../assets/icons/100k_horisontal.svg"
-        alt="100 kladdkakor logo"
-      />
+        alt="100 kladdkakor logo" />
     </RouterLink>
-
-    <RandomButton :recipes="recipes" />
   </nav>
 </template>
 
