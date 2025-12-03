@@ -2,6 +2,7 @@
   <button class="knapp" v-on:click ="goToRandom">
     Randon recept
   </button>
+  <!-- <RandomButton :recipes="recipes" /> -->
 </template>
 
 <script>
