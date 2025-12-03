@@ -3,6 +3,7 @@ import { getData } from "../src/apiFunctions.js";
 import RecipeCard from "../src/components/RecipeCard.vue";
 import SearchBar from "../src/components/SearchBar.vue";
 import Category from "@/components/Category.vue";
+import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
 
 export default {
   data() {
@@ -67,6 +68,7 @@ export default {
     RecipeCard,
     SearchBar,
     Category,
+    RandomButtonAlt,
   },
 };
 </script>
@@ -75,6 +77,12 @@ export default {
   <h1>HOME VIEW</h1>
   <SearchBar @search="searchResult" />
   <div class="loading" v-if="loading">Loading recipes...</div>
+  <div class="flex-container">
+    <SearchBar @search="searchResult" />
+    <RandomButtonAlt class="random-button" />
+  </div>
+
+  <div v-if="loading">Loading recipes...</div>
   <div v-else-if="error" class="error">{{ error }}</div>
   <div v-else>
     <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
@@ -97,6 +105,17 @@ h1 {
   font-family: "Belanosima", sans-serif;
   font-weight: 600;
   margin-left: 0.5rem;
+}
+
+.flex-container {
+  display: flex;
+  height: 3rem;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.random-button {
+  height: 100%;
 }
 
 .recipe-card {

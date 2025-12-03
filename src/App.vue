@@ -7,6 +7,7 @@ import StepList from "./components/StepList.vue";
 import RatingInput from "./components/RatingInput.vue";
 import Comment from "@/components/Comment.vue";
 import { getData } from "./apiFunctions.js";
+import Navbar from "./components/Navbar.vue";
 
 export default {
   name: "App",
@@ -24,22 +25,13 @@ export default {
     StepList,
     RatingInput,
     Comment,
+    Navbar,
   },
 };
 </script>
 
 <template>
-  <nav>
-    <nav>
-      <RouterLink to="/">
-        <img
-          class="logo"
-          src="./assets/icons/100k_horisontal_bg.svg"
-          alt="100 kladdkakor logo"
-        />
-      </RouterLink>
-    </nav>
-  </nav>
+  <Navbar />
   <main>
     <RouterView />
   </main>
@@ -50,16 +42,5 @@ export default {
 
 body {
   background-color: var(--color-secondary-mid);
-}
-
-.logo {
-  box-shadow: var(--shadow-elevation-medium);
-  margin: 0.5rem;
-  width: 25rem;
-  transition: transform 0.2s;
-}
-
-.logo:hover {
-  transform: scale(1.025);
 }
 </style>
