@@ -29,13 +29,10 @@ export default {
       this.loading = true;
       this.error = null;
       try {
-        const [recipes, categories] = await Promise.all([
-          getData("https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"),
-          getData("https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/categories")
-        ]);
+        const recipes = await getData("https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes");
         this.recipes = recipes;
-        this.categories = categories;
-        console.log("CategoryView loaded categories:", categories);
+        this.categories = this.buildCategoriesFromRecipes(recipes);
+        console.log("CategoryView loaded categories:", this.categories);
         this.filterByCategory();
       } catch (error) {
         console.error("Failed to load data:", error);
@@ -44,12 +41,26 @@ export default {
         this.loading = false;
       }
     },
+    buildCategoriesFromRecipes(recipes) {
+      const categorySet = new Set();
+      recipes.forEach(recipe => {
+        if (recipe.categories && Array.isArray(recipe.categories)) {
+          recipe.categories.forEach(cat => categorySet.add(cat));
+        }
+      });
+      return Array.from(categorySet).sort().map(name => ({
+        id: name.toLowerCase().replace(/\s+/g, '-'),
+        name: name
+      }));
+    },
     filterByCategory() {
       const categoryId = this.$route.params.id;
       this.currentCategory = this.categories.find(c => c.id === categoryId);
 
       if (categoryId && this.currentCategory) {
-        this.filteredRecipes = this.recipes.filter(recipe => recipe.categoryId === categoryId);
+        this.filteredRecipes = this.recipes.filter(recipe =>
+          recipe.categories && recipe.categories.includes(this.currentCategory.name)
+        );
       } else {
         this.filteredRecipes = [...this.recipes];
       }
@@ -57,9 +68,12 @@ export default {
     searchResult(searchValue) {
       this.searchValue = searchValue;
       const categoryId = this.$route.params.id;
+      const currentCat = this.categories.find(c => c.id === categoryId);
 
-      let filtered = categoryId
-        ? this.recipes.filter(recipe => recipe.categoryId === categoryId)
+      let filtered = categoryId && currentCat
+        ? this.recipes.filter(recipe =>
+          recipe.categories && recipe.categories.includes(currentCat.name)
+        )
         : [...this.recipes];
 
       if (!searchValue) {
@@ -120,6 +134,7 @@ h1 {
   color: var(--color-primary-dark);
   padding: 1rem;
 }
+
 .error {
   color: red;
   padding: 1rem;
