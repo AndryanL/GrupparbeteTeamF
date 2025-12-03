@@ -74,7 +74,6 @@ export default {
 <template>
   <div class="wrapper">
     <div class="flex-container">
-      <h1>RECIPE VIEW</h1>
       <div v-if="loading">Loading recipe...</div>
       <div v-else-if="error" class="error">{{ error }}</div>
       <div v-else-if="recipe">
@@ -90,8 +89,7 @@ export default {
 
         <StepList
           :id="recipe.id"
-          :instructions="recipe.instructions"
-        ></StepList>
+          :instructions="recipe.instructions"></StepList>
 
         <div class="comment-container">
           <h2>Kommentarer</h2>
@@ -119,6 +117,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 5rem;
 }
 .flex-container {
   width: min(93.5vw, 768px);
