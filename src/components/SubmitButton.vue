@@ -1,38 +1,30 @@
 <template>
-  <button class="knapp" v-on:click="$emit('click')">
+  <button type="button" class="knapp" v-on:click="$emit('click')">
     {{ text }}
   </button>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 defineProps({
-  text: String
+  text: String,
 });
 </script>
 
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
 
-    .knapp{
-        cursor: pointer;
-        min-width: 181px;
-        padding: 14px 52px;
-        border-radius: 5px;
-        border: none;
-        background: #FF909F;
-        color: #FFFAF6;
-        font-family: "Playwrite DK Uloopet", cursive;
-        font-size: 24px;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-    }
+.knapp {
+  border-radius: 0.5rem;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-family: "Playwrite DK Uloopet", cursive;
+  font-size: 1rem;
+}
 
-    .knapp:hover {
-        transform: scale(1.025);
-    }
-
+.knapp:hover {
+  transform: scale(1.025);
+  cursor: pointer;
+}
 </style>

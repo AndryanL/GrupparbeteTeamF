@@ -61,6 +61,30 @@ export async function postData(apiUrl, data) {
     });
 }
 
+export async function postComment(apiUrl, data) {
+  try {
+    console.log(data);
+    console.log("init postComment");
+    let response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(
+        `HTTP error, status: ${response.status} - ${response.statusText}`
+      );
+    }
+    let newCommentData = await response.json();
+    console.log("New Comment Data:", newCommentData);
+  } catch (error) {
+    console.log(error);
+    console.error("Error:", error.message);
+  }
+}
+
 export async function postRating(apiUrl, data) {
   console.log(data);
   fetch(apiUrl, {

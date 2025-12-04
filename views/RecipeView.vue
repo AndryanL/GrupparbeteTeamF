@@ -7,12 +7,15 @@ import Comment from "@/components/Comment.vue";
 import IngredientList from "@/components/IngredientList.vue";
 import ReceptOverview from "@/components/ReceptOverview.vue";
 import Category from "@/components/Category.vue";
+import CommentsForm from "@/components/CommentsForm.vue";
+
 export default {
   data() {
     return {
       recipe: null,
       loading: false,
       error: null,
+      commentComponentKey: 0,
     };
   },
   components: {
@@ -21,6 +24,7 @@ export default {
     RatingInput,
     Comment,
     IngredientList,
+    CommentsForm,
   },
   computed: {
     recipeId() {
@@ -57,6 +61,9 @@ export default {
         console.log("No recipe loaded");
       }
     },
+    forceCommentComponentReRender() {
+      this.commentComponentKey++;
+    },
   },
   async created() {
     await this.loadRecipes();
@@ -89,11 +96,16 @@ export default {
 
         <StepList
           :id="recipe.id"
-          :instructions="recipe.instructions"></StepList>
+          :instructions="recipe.instructions"
+        ></StepList>
 
         <div class="comment-container">
+          <CommentsForm
+            :recipeId="recipe.id"
+            @on-comment-created="forceCommentComponentReRender"
+          />
           <h2>Kommentarer</h2>
-          <Comment :recipe-id="recipe.id" />
+          <Comment :recipeId="recipe.id" :key="commentComponentKey" />
         </div>
       </div>
       <div v-else>

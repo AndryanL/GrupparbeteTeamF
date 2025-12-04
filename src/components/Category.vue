@@ -35,7 +35,8 @@ export default {
       <li
         v-for="category in categories"
         :key="category.id"
-        @click="goToCategoryView(category.id)">
+        @click="goToCategoryView(category.id)"
+      >
         <img :src="iconUrl" alt="kladdkakaikon" class="kladdkaka-icon" />
         <span class="category-text">{{ category.name }}</span>
       </li>
@@ -47,6 +48,10 @@ export default {
 </template>
 
 <style scoped>
+li:active {
+  font-weight: 700;
+}
+
 .category-card {
   background: #ffc2ca;
   border-radius: 0.5rem;
