@@ -25,16 +25,11 @@ export default {
       this.loading = true;
       this.error = null;
       try {
-        const [recipes, categories] = await Promise.all([
-          getData(
-            "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
-          ),
-          getData(
-            "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/categories"
-          ),
-        ]);
+        const recipes = await getData(
+          "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
+        );
         this.recipes = recipes;
-        this.categories = categories;
+        this.categories = this.buildCategoriesFromRecipes(recipes);
         this.filteredRecipes = [...recipes];
         this.topCategories = this.getTopCategories();
       } catch (error) {
@@ -44,15 +39,29 @@ export default {
         this.loading = false;
       }
     },
+    buildCategoriesFromRecipes(recipes) {
+      const categorySet = new Set();
+      recipes.forEach(recipe => {
+        if (recipe.categories && Array.isArray(recipe.categories)) {
+          recipe.categories.forEach(cat => categorySet.add(cat));
+        }
+      });
+      return Array.from(categorySet).sort().map(name => ({
+        id: name.toLowerCase().replace(/\s+/g, '-'),
+        name: name
+      }));
+    },
     getTopCategories() {
       const counts = {};
       this.recipes.forEach((recipe) => {
-        if (recipe.categoryId) {
-          counts[recipe.categoryId] = (counts[recipe.categoryId] || 0) + 1;
+        if (recipe.categories && Array.isArray(recipe.categories)) {
+          recipe.categories.forEach(cat => {
+            counts[cat] = (counts[cat] || 0) + 1;
+          });
         }
       });
       return this.categories
-        .map((c) => ({ ...c, count: counts[c.id] || 0 }))
+        .map((c) => ({ ...c, count: counts[c.name] || 0 }))
         .sort((a, b) => b.count - a.count)
         .slice(0, 5);
     },
@@ -87,27 +96,19 @@ export default {
       </div>
       <div class="homebody">
         <div>
-          <Category
-            class="category"
-            :categories="topCategories"
-            :showViewAll="categories.length > 5" />
+          <Category class="category" :categories="topCategories" :showViewAll="categories.length > 5" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
-          <div
-            v-if="recipes.length > 0 && filteredRecipes.length === 0"
-            class="no-results">
+          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
             Här finns inga kladdkakor som matchar din sökning. Prova igen!
           </div>
           <div v-else>
             <div v-for="recipe in filteredRecipes" :key="recipe.id">
-              <RecipeCard
-                class="recipe-card"
-                @click="
-                  $router.push({ name: 'recipe', params: { id: recipe.id } })
-                "
-                :recipe="recipe"></RecipeCard>
+              <RecipeCard class="recipe-card" @click="
+                $router.push({ name: 'recipe', params: { id: recipe.id } })
+                " :recipe="recipe"></RecipeCard>
             </div>
           </div>
         </div>
@@ -136,6 +137,7 @@ h1 {
   align-items: center;
   width: 100%;
 }
+
 .flex-container {
   width: min(93.5vw, 768px);
   display: flex;
@@ -143,7 +145,7 @@ h1 {
   align-items: center;
 }
 
-.flex-container > * {
+.flex-container>* {
   width: 100%;
 }
 
@@ -170,11 +172,13 @@ h1 {
   color: red;
   padding: 1rem;
 }
+
 .no-results {
   font-family: "Playwrite Dk Uloopet", cursive;
   color: var(--color-primary-dark);
   padding: 1rem;
 }
+
 .loading {
   font-family: "Playwrite Dk Uloopet", cursive;
   color: var(--color-primary-dark);
