@@ -1,53 +1,63 @@
 <template>
-  <fieldset class="comment-box">
-    <legend>Lämna en kommentar</legend>
+  <form @submit.prevent="addComment" class="comment-form">
+    <fieldset class="comment-box">
+      <legend>Lämna en kommentar</legend>
 
-    <InputField 
-      placeholder="Ditt namn"
-      v-model="name"
-    />
-    <br/>
-    <InputField 
-      placeholder="Din kommentar"
-      v-model="text"
-    />
-    <br/>
-    <SubmitButton 
-      text="Skicka"
-      @click="addComment"
-    />
-  </fieldset>
-
-  <div class="comments">
-    <div class="comment" v-for="c in comments" :key="c.id">
-      <strong>{{ c.name }}</strong> — <small>{{ c.date }}</small>
-      <p>{{ c.text }}</p>
-    </div>
-  </div>
+      <InputField placeholder="Ditt namn" v-model="name" />
+      <br />
+      <InputField placeholder="Din kommentar" v-model="comment" />
+      <br />
+      <SubmitButton text="Skicka" type="submit" />
+    </fieldset>
+  </form>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import InputField from './InputFieldForCommentsForm.vue';
-import SubmitButton from './SubmitButton.vue';
+<script>
+import InputField from "./InputFieldForCommentsForm.vue";
+import SubmitButton from "./SubmitButton.vue";
+import { postComment } from "@/apiFunctions.js";
 
-const name = ref('');
-const text = ref('');
-const comments = ref([]);
+export default {
+  props: {
+    recipeId: {
+      type: String,
+      required: true,
+    },
+  },
+  components: {
+    InputField,
+    SubmitButton,
+  },
+  data() {
+    return {
+      name: "",
+      comment: "",
+      comments: [],
+    };
+  },
+  methods: {
+    async addComment() {
+      if (!this.name || !this.comment) return;
 
-function addComment() {
-  if (!name.value || !text.value) return;
+      let comment = {
+        name: this.name /* 
+        date: new Date().toLocaleDateString(), */,
+        comment: this.comment,
+      };
+      console.log("pre postcomment");
+      await postComment(
+        `https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes/${this.recipeId}/comments`,
+        comment
+      );
+      console.log("post postcomment");
+      this.$emit("onCommentCreated");
 
-  comments.value.push({
-    id: Date.now(),
-    name: name.value,
-    date: new Date().toLocaleDateString(),
-    text: text.value
-  });
-
-  name.value = '';
-  text.value = '';
-}
+      this.name = "";
+      this.comment = "";
+    },
+  },
+  emits: ["onCommentCreated"],
+};
 </script>
 
 <style scoped>
