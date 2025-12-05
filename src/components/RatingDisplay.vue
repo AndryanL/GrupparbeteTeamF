@@ -109,6 +109,6 @@ export default {
 
 .rating-number {
   margin-inline: 0.25rem;
-  font-family: "Comfortaa", sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 </style>

@@ -41,7 +41,8 @@ export default {
 <style scoped>
 .card-container {
   width: min(93.5vw, 40rem);
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: solid 1px var(--color-primary-midlight);
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;

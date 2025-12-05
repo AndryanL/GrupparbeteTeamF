@@ -1,5 +1,4 @@
 <script>
-import iconUrl from "@/assets/images/bullet-point.svg";
 export default {
   name: "Category",
   props: {
@@ -7,122 +6,195 @@ export default {
       type: Array,
       default: () => [],
     },
-    showViewAll: {
+    initiallyOpen: {
       type: Boolean,
-      default: false,
+      default: true,
     },
+  },
+  data() {
+    return {
+      isOpen: true,
+    };
   },
   methods: {
     goToCategoryView(categoryId) {
       this.$router.push({ name: "category", params: { id: categoryId } });
     },
-    goToAllCategories() {
-      this.$router.push({ name: "category" });
+    toggleAccordion() {
+      this.isOpen = !this.isOpen;
     },
   },
-  data() {
-    return {
-      iconUrl,
-    };
+  mounted() {
+    this.isOpen = this.initiallyOpen;
   },
 };
 </script>
 
 <template>
-  <aside class="category-card">
-    <h2 class="category-title">Kategorier</h2>
-    <ul>
-      <li
-        v-for="category in categories"
-        :key="category.id"
-        @click="goToCategoryView(category.id)"
-      >
-        <img :src="iconUrl" alt="kladdkakaikon" class="kladdkaka-icon" />
-        <span class="category-text">{{ category.name }}</span>
-      </li>
-    </ul>
-    <button v-if="showViewAll" @click="goToAllCategories" class="view-all-btn">
-      Visa alla kategorier
-    </button>
+  <aside class="category-accordion">
+    <div class="accordion-header" @click="toggleAccordion">
+      <h2 class="accordion-title">Kategorier</h2>
+      <span class="accordion-icon">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          :class="{ rotated: isOpen }"
+        >
+          <path
+            d="M4 6L8 10L12 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </div>
+
+    <!-- Accordion Content -->
+    <transition
+      name="accordion"
+      @enter="startEnterTransition"
+      @after-enter="endEnterTransition"
+      @before-leave="startLeaveTransition"
+      @after-leave="endLeaveTransition"
+    >
+      <div v-if="isOpen" class="accordion-content">
+        <hr />
+        <ul class="category-list">
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            @click="goToCategoryView(category.id)"
+            class="category-item"
+          >
+            <span class="category-text">{{ category.name }}</span>
+          </li>
+        </ul>
+      </div>
+    </transition>
   </aside>
 </template>
 
 <style scoped>
-li:active {
-  font-weight: 700;
-}
-
-.category-card {
-  background: #ffc2ca;
+.category-accordion {
+  background-color: var(--color-secondary-mid);
   border-radius: 0.5rem;
   box-shadow: var(--shadow-elevation-low);
-  padding: 0.75rem 0.75rem;
-  font-family: "Playwrite DK Uloopet", cursive;
+  padding: 0;
   width: min(93.5vw, 40rem);
+  border: solid 1px var(--color-primary-midlight);
+  overflow: hidden;
 }
 
-.category-title {
-  font-size: 0.9em;
-  margin-bottom: 0.3em;
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.accordion-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion-title {
+  font-family: "Playwrite DK Uloopet", cursive;
+  font-size: 1.25rem;
+  font-weight: 500;
   margin: 0;
-  text-align: center;
 }
 
-ul {
+.accordion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+  color: var(--color-primary-mid);
+}
+
+.accordion-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.accordion-icon .rotated {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  padding: 0 1rem 1rem 1rem;
+}
+
+hr {
+  border: none;
+  border-top: solid 1px var(--color-primary-midlight);
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.category-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-li {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-bottom: 0.2em;
-  font-size: 0.7em;
+.category-item {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 300;
+  margin-block: 0.75rem;
+  line-height: 2.5ex;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 0.3rem;
   border-radius: 4px;
+  padding: 0.25rem 0.5rem;
 }
 
-li:hover {
+.category-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateX(2px);
 }
 
-.kladdkaka-icon {
-  width: 0.8rem;
-  height: 0.8rem;
-  flex-shrink: 0;
+.category-item:active {
+  font-weight: 700;
 }
 
 .category-text {
-  font-family: "Playwrite DK Uloopet", cursive;
-  font-size: 1em;
-}
-
-.view-all-btn {
   display: block;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  font-family: "Playwrite DK Uloopet", cursive;
-  font-size: 0.8em;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.view-all-btn:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  transform: translateX(2px);
+/* Transition animations */
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+}
+
+.accordion-enter-to,
+.accordion-leave-from {
+  max-height: 1000px;
+  opacity: 1;
 }
 
 @media screen and (min-width: 992px) {
-  .category-card {
-    max-width: 13rem;
-    margin: 0.5rem;
+  .category-accordion {
+    max-width: 15rem;
+    margin-right: 0.5rem;
   }
 }
 </style>

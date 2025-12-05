@@ -59,11 +59,12 @@ export default {
   display: flex;
   align-items: center;
   width: min(93.5vw, 25rem);
-  margin: 0.5rem;
+  margin-right: 0.5rem;
   padding: 0.5rem 0.75rem;
   box-shadow: var(--shadow-elevation-low);
   border-radius: 0.5rem;
-  background: var(--color-primary-light);
+  background: var(--color-secondary-mid);
+  border: solid 1px var(--color-primary-midlight);
   position: relative;
 }
 
@@ -78,7 +79,7 @@ export default {
   outline: none;
   width: 100%;
   font-size: 16px;
-  font-family: comfortaa;
+  font-family: "DM Sans";
   color: var(--color-primary-mid);
   background: transparent;
 }

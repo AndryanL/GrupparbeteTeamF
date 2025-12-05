@@ -14,13 +14,15 @@ export default {
       <img
         class="logo"
         src="../assets/icons/100k_horisontal.svg"
-        alt="100 kladdkakor logo" />
+        alt="100 kladdkakor logo"
+      />
     </RouterLink>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
+  z-index: 0;
   width: 100vw;
   height: 6rem;
   background-color: var(--color-primary);
@@ -28,6 +30,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  position: fixed;
+  top: 0;
 }
 
 .logo {
