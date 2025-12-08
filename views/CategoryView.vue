@@ -4,6 +4,7 @@ import RecipeCard from "../src/components/RecipeCard.vue";
 import SearchBar from "../src/components/SearchBar.vue";
 import Category from "@/components/Category.vue";
 import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   data() {
@@ -99,32 +100,38 @@ export default {
     SearchBar,
     Category,
     RandomButtonAlt,
+    Navbar,
   },
 };
 </script>
 
 <template>
-  <h1 v-if="currentCategory">{{ currentCategory.name }}</h1>
-  <h1 v-else>Alla Kategorier</h1>
-  <div class="homebody">
-    <div class="homenav-placeholder"></div>
-    <div class="homenav">
-      <div class="homenav-container">
-        <SearchBar class="searchbar" @search="searchResult" />
-        <RandomButtonAlt class="random-button" :recipes="recipes" />
-      </div>
-      <Category class="category" :categories="categories" />
-    </div>
-    <div v-if="loading">Loading recipes...</div>
-    <div v-else-if="error" class="error">{{ error }}</div>
-    <div v-else>
-      <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
-        Här var det tomt! Inga recept matchar din sökning.
-      </div>
-      <div v-else>
-        <div v-for="recipe in filteredRecipes" :key="recipe.id" class="container">
-          <RecipeCard class="recipe-card" @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
-            :recipe="recipe"></RecipeCard>
+  <Navbar />
+  <div class="target-section>"></div>
+  <div class="wrapper">
+    <div class="flex-container">
+      <div class="loading" v-if="loading">Loading recipes...</div>
+      <div class="homebody">
+        <div class="homenav-placeholder"></div>
+        <div class="homenav">
+          <div class="homenav-container">
+            <SearchBar class="searchbar" @search="searchResult" />
+            <RandomButtonAlt class="random-button" :recipes="recipes" />
+          </div>
+          <Category class="category" :categories="categories" :active-id="$route.params.id" />
+        </div>
+        <div v-if="loading">Loading recipes...</div>
+        <div v-else-if="error" class="error">{{ error }}</div>
+        <div v-else>
+          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
+            Här var det tomt! Inga recept matchar din sökning.
+          </div>
+          <div v-else>
+            <div v-for="recipe in filteredRecipes" :key="recipe.id" class="container">
+              <RecipeCard class="recipe-card" @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
+                :recipe="recipe"></RecipeCard>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -139,6 +146,10 @@ h1 {
   text-align: center;
 }
 
+.target-section {
+  padding: 6rem;
+}
+
 .homebody {
   display: flex;
   flex-direction: column;
@@ -150,6 +161,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 10rem;
 }
 
 .flex-container {

@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .navbar {
-  z-index: 0;
+  z-index: 1;
   width: 100vw;
   background-color: var(--color-primary);
   box-shadow: var(--shadow-elevation-medium);
