@@ -6,6 +6,7 @@ import Category from "@/components/Category.vue";
 import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
 import Hero from "@/components/Hero.vue";
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
@@ -86,6 +87,7 @@ export default {
     RandomButtonAlt,
     Hero,
     Navbar,
+    Footer,
   },
 };
 </script>
@@ -131,6 +133,7 @@ export default {
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <style scoped>
