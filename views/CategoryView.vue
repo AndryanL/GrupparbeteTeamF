@@ -3,6 +3,7 @@ import { getData } from "../src/apiFunctions.js";
 import RecipeCard from "../src/components/RecipeCard.vue";
 import SearchBar from "../src/components/SearchBar.vue";
 import Category from "@/components/Category.vue";
+import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
 
 export default {
   data() {
@@ -97,6 +98,7 @@ export default {
     RecipeCard,
     SearchBar,
     Category,
+    RandomButtonAlt,
   },
 };
 </script>
