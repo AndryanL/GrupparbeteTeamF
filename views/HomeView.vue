@@ -66,8 +66,7 @@ export default {
       });
       return this.categories
         .map((c) => ({ ...c, count: counts[c.name] || 0 }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
+        .sort((a, b) => b.count - a.count);
     },
     searchResult(searchValue) {
       this.searchValue = searchValue;
@@ -92,9 +91,9 @@ export default {
 </script>
 
 <template>
-  <Hero :pageId="'#scrolltarget'"></Hero>
+  <Hero :pageId="'#target-section'"></Hero>
   <Navbar />
-  <div id="scrolltarget"></div>
+  <div id="target-section"></div>
   <div class="wrapper">
     <div class="flex-container">
       <div class="loading" v-if="loading">Loading recipes...</div>
@@ -105,15 +104,17 @@ export default {
             <SearchBar class="searchbar" @search="searchResult" />
             <RandomButtonAlt class="random-button" :recipes="recipes" />
           </div>
-          <Category class="category" :categories="topCategories" />
+          <Category
+            class="category"
+            :categories="topCategories"
+            :showViewAll="this.categories.length > 10" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
           <div
-            v-if="recipes.length > 0 && filteredRecipes.length === 0"
-            class="no-results"
-          >
+            v-if="this.recipes.length > 0 && filteredRecipes.length === 0"
+            class="no-results">
             Här finns inga kladdkakor som matchar din sökning. Prova igen!
           </div>
           <div v-else>
@@ -123,8 +124,7 @@ export default {
                 @click="
                   $router.push({ name: 'recipe', params: { id: recipe.id } })
                 "
-                :recipe="recipe"
-              ></RecipeCard>
+                :recipe="recipe"></RecipeCard>
             </div>
           </div>
         </div>
@@ -141,8 +141,8 @@ h1 {
   text-align: center;
 }
 
-#scrolltarget {
-  padding: 3rem;
+#target-section {
+  padding: 6rem;
 }
 
 .homebody {

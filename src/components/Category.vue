@@ -39,15 +39,13 @@ export default {
           width="16"
           height="16"
           viewBox="0 0 16 16"
-          :class="{ rotated: isOpen }"
-        >
+          :class="{ rotated: isOpen }">
           <path
             d="M4 6L8 10L12 6"
             stroke="currentColor"
             stroke-width="1.5"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+            stroke-linejoin="round" />
         </svg>
       </span>
     </div>
@@ -58,8 +56,7 @@ export default {
       @enter="startEnterTransition"
       @after-enter="endEnterTransition"
       @before-leave="startLeaveTransition"
-      @after-leave="endLeaveTransition"
-    >
+      @after-leave="endLeaveTransition">
       <div v-if="isOpen" class="accordion-content">
         <hr />
         <ul class="category-list">
@@ -67,8 +64,7 @@ export default {
             v-for="category in categories"
             :key="category.id"
             @click="goToCategoryView(category.id)"
-            class="category-item"
-          >
+            class="category-item">
             <span class="category-text">{{ category.name }}</span>
           </li>
         </ul>
