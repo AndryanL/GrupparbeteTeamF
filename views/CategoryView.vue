@@ -21,16 +21,18 @@ export default {
     await this.loadData();
   },
   watch: {
-    '$route.params.id': function () {
+    "$route.params.id": function () {
       this.filterByCategory();
-    }
+    },
   },
   methods: {
     async loadData() {
       this.loading = true;
       this.error = null;
       try {
-        const recipes = await getData("https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes");
+        const recipes = await getData(
+          "https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes"
+        );
         this.recipes = recipes;
         this.categories = this.buildCategoriesFromRecipes(recipes);
         console.log("CategoryView loaded categories:", this.categories);
@@ -44,23 +46,27 @@ export default {
     },
     buildCategoriesFromRecipes(recipes) {
       const categorySet = new Set();
-      recipes.forEach(recipe => {
+      recipes.forEach((recipe) => {
         if (recipe.categories && Array.isArray(recipe.categories)) {
-          recipe.categories.forEach(cat => categorySet.add(cat));
+          recipe.categories.forEach((cat) => categorySet.add(cat));
         }
       });
-      return Array.from(categorySet).sort().map(name => ({
-        id: name.toLowerCase().replace(/\s+/g, '-'),
-        name: name
-      }));
+      return Array.from(categorySet)
+        .sort()
+        .map((name) => ({
+          id: name.toLowerCase().replace(/\s+/g, "-"),
+          name: name,
+        }));
     },
     filterByCategory() {
       const categoryId = this.$route.params.id;
-      this.currentCategory = this.categories.find(c => c.id === categoryId);
+      this.currentCategory = this.categories.find((c) => c.id === categoryId);
 
       if (categoryId && this.currentCategory) {
-        this.filteredRecipes = this.recipes.filter(recipe =>
-          recipe.categories && recipe.categories.includes(this.currentCategory.name)
+        this.filteredRecipes = this.recipes.filter(
+          (recipe) =>
+            recipe.categories &&
+            recipe.categories.includes(this.currentCategory.name)
         );
       } else {
         this.filteredRecipes = [...this.recipes];
@@ -69,13 +75,15 @@ export default {
     searchResult(searchValue) {
       this.searchValue = searchValue;
       const categoryId = this.$route.params.id;
-      const currentCat = this.categories.find(c => c.id === categoryId);
+      const currentCat = this.categories.find((c) => c.id === categoryId);
 
-      let filtered = categoryId && currentCat
-        ? this.recipes.filter(recipe =>
-          recipe.categories && recipe.categories.includes(currentCat.name)
-        )
-        : [...this.recipes];
+      let filtered =
+        categoryId && currentCat
+          ? this.recipes.filter(
+              (recipe) =>
+                recipe.categories && recipe.categories.includes(currentCat.name)
+            )
+          : [...this.recipes];
 
       if (!searchValue) {
         this.filteredRecipes = filtered;
@@ -96,32 +104,37 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper">
-    <div class="flex-container">
-      <h1 v-if="currentCategory">{{ currentCategory.name }}</h1>
-      <h1 v-else>Alla Kategorier</h1>
-      <div class="loading" v-if="loading">Loading recipes...</div>
+  <h1 v-if="currentCategory">{{ currentCategory.name }}</h1>
+  <h1 v-else>Alla Kategorier</h1>
+  <div class="homebody">
+    <div class="homenav-placeholder"></div>
+    <div class="homenav">
       <div class="homenav-container">
-        <SearchBar @search="searchResult" />
-        <RandomButtonAlt v-if="recipes.length > 0" class="random-button" :recipes="recipes" />
+        <SearchBar class="searchbar" @search="searchResult" />
+        <RandomButtonAlt class="random-button" :recipes="recipes" />
       </div>
-      
-      <div class="homebody">
-        <div>
-          <Category class="category" v-if="categories.length > 0" :categories="categories" />
-        </div>
-        <div v-if="loading">Loading recipes...</div>
-        <div v-else-if="error" class="error">{{ error }}</div>
-        <div v-else>
-          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
-            Här var det tomt! Inga recept matchar din sökning.
-          </div>
-          <div v-else>
-            <div v-for="recipe in filteredRecipes" :key="recipe.id">
-              <RecipeCard class="recipe-card" @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
-                :recipe="recipe"></RecipeCard>
-            </div>
-          </div>
+      <Category class="category" :categories="topCategories" />
+    </div>
+    <div v-if="loading">Loading recipes...</div>
+    <div v-else-if="error" class="error">{{ error }}</div>
+    <div v-else>
+      <div
+        v-if="recipes.length > 0 && filteredRecipes.length === 0"
+        class="no-results"
+      >
+        Här var det tomt! Inga recept matchar din sökning.
+      </div>
+      <div v-else>
+        <div
+          v-for="recipe in filteredRecipes"
+          :key="recipe.id"
+          class="container"
+        >
+          <RecipeCard
+            class="recipe-card"
+            @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
+            :recipe="recipe"
+          ></RecipeCard>
         </div>
       </div>
     </div>
@@ -156,20 +169,36 @@ h1 {
   align-items: center;
 }
 
-.flex-container>* {
+.flex-container > * {
   width: 100%;
+}
+
+.homenav {
+  padding-top: 0.5rem;
+}
+
+.homenav-placeholder {
+  display: none;
 }
 
 .homenav-container {
   display: flex;
-  height: 3rem;
+  height: 2.5rem;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: min(93.5vw, 40rem);
+  margin-bottom: 0.5rem;
+}
+
+.searchbar {
+  flex: 1;
 }
 
 .random-button {
-  height: 100%;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
 }
 
 .recipe-card {
@@ -198,9 +227,39 @@ h1 {
 
 @media screen and (min-width: 992px) {
   .homebody {
-    margin-left: -16rem;
-    flex-direction: row;
-    align-items: start;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    grid-template-areas: "nav content";
+    gap: 2rem;
+    width: 100%;
+    margin-left: 0;
+    max-width: min(93.5vw, 768px);
+    margin: 0 auto;
+  }
+
+  .homenav {
+    grid-area: nav;
+    position: fixed;
+    top: 8.75rem;
+    width: 15rem;
+    margin-right: 1rem;
+  }
+
+  .homenav-container {
+    width: min(93.5vw, 15rem);
+  }
+
+  .homenav-placeholder {
+    grid-area: nav;
+    display: block;
+    width: 15rem;
+    height: 150px;
+    visibility: hidden;
+  }
+
+  /* Content takes the second column */
+  .homebody > div:not(.homenav):not(.homenav-placeholder) {
+    grid-area: content;
   }
 }
 </style>

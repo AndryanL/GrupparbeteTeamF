@@ -31,15 +31,15 @@ export default {
 </script>
 
 <template>
-  <Navbar />
+  <!-- 
+  <Navbar /> -->
   <main>
     <RouterView />
   </main>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&family=Comfortaa:wght@300..700&family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
 body {
   background-color: var(--color-secondary-mid);
 }

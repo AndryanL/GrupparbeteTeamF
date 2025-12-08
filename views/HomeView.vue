@@ -4,6 +4,8 @@ import RecipeCard from "../src/components/RecipeCard.vue";
 import SearchBar from "../src/components/SearchBar.vue";
 import Category from "@/components/Category.vue";
 import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
+import Hero from "@/components/Hero.vue";
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   data() {
@@ -41,29 +43,30 @@ export default {
     },
     buildCategoriesFromRecipes(recipes) {
       const categorySet = new Set();
-      recipes.forEach(recipe => {
+      recipes.forEach((recipe) => {
         if (recipe.categories && Array.isArray(recipe.categories)) {
-          recipe.categories.forEach(cat => categorySet.add(cat));
+          recipe.categories.forEach((cat) => categorySet.add(cat));
         }
       });
-      return Array.from(categorySet).sort().map(name => ({
-        id: name.toLowerCase().replace(/\s+/g, '-'),
-        name: name
-      }));
+      return Array.from(categorySet)
+        .sort()
+        .map((name) => ({
+          id: name.toLowerCase().replace(/\s+/g, "-"),
+          name: name,
+        }));
     },
     getTopCategories() {
       const counts = {};
       this.recipes.forEach((recipe) => {
         if (recipe.categories && Array.isArray(recipe.categories)) {
-          recipe.categories.forEach(cat => {
+          recipe.categories.forEach((cat) => {
             counts[cat] = (counts[cat] || 0) + 1;
           });
         }
       });
       return this.categories
         .map((c) => ({ ...c, count: counts[c.name] || 0 }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
+        .sort((a, b) => b.count - a.count);
     },
     searchResult(searchValue) {
       this.searchValue = searchValue;
@@ -81,34 +84,47 @@ export default {
     SearchBar,
     Category,
     RandomButtonAlt,
+    Hero,
+    Navbar,
   },
 };
 </script>
 
 <template>
+  <Hero :pageId="'#target-section'"></Hero>
+  <Navbar />
+  <div id="target-section"></div>
   <div class="wrapper">
     <div class="flex-container">
-      <h1>HOME VIEW</h1>
       <div class="loading" v-if="loading">Loading recipes...</div>
-      <div class="homenav-container">
-        <SearchBar @search="searchResult" />
-        <RandomButtonAlt class="random-button" :recipes="recipes" />
-      </div>
       <div class="homebody">
-        <div>
-          <Category class="category" :categories="topCategories" :showViewAll="categories.length > 5" />
+        <div class="homenav-placeholder"></div>
+        <div class="homenav">
+          <div class="homenav-container">
+            <SearchBar class="searchbar" @search="searchResult" />
+            <RandomButtonAlt class="random-button" :recipes="recipes" />
+          </div>
+          <Category
+            class="category"
+            :categories="topCategories"
+            :showViewAll="this.categories.length > 10" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
-          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
+          <div
+            v-if="this.recipes.length > 0 && filteredRecipes.length === 0"
+            class="no-results">
             Här finns inga kladdkakor som matchar din sökning. Prova igen!
           </div>
           <div v-else>
             <div v-for="recipe in filteredRecipes" :key="recipe.id">
-              <RecipeCard class="recipe-card" @click="
-                $router.push({ name: 'recipe', params: { id: recipe.id } })
-                " :recipe="recipe"></RecipeCard>
+              <RecipeCard
+                class="recipe-card"
+                @click="
+                  $router.push({ name: 'recipe', params: { id: recipe.id } })
+                "
+                :recipe="recipe"></RecipeCard>
             </div>
           </div>
         </div>
@@ -123,6 +139,10 @@ h1 {
   font-weight: 600;
   margin-left: 0.5rem;
   text-align: center;
+}
+
+#target-section {
+  padding: 6rem;
 }
 
 .homebody {
@@ -145,20 +165,36 @@ h1 {
   align-items: center;
 }
 
-.flex-container>* {
+.flex-container > * {
   width: 100%;
+}
+
+.homenav {
+  padding-top: 0.5rem;
+}
+
+.homenav-placeholder {
+  display: none;
 }
 
 .homenav-container {
   display: flex;
-  height: 3rem;
+  height: 2.5rem;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: min(93.5vw, 40rem);
+  margin-bottom: 0.5rem;
+}
+
+.searchbar {
+  flex: 1;
 }
 
 .random-button {
-  height: 100%;
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
 }
 
 .recipe-card {
@@ -187,9 +223,40 @@ h1 {
 
 @media screen and (min-width: 992px) {
   .homebody {
-    margin-left: -16rem;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    grid-template-areas: "nav content";
+    gap: 2rem;
+    width: 100%;
+    max-width: min(93.5vw, 768px);
     align-items: start;
+    margin-left: -15rem;
+    margin-top: 5rem;
+  }
+
+  .homenav {
+    grid-area: nav;
+    position: sticky;
+    top: calc(100vh / 3 / 2);
+    width: 15rem;
+    margin-right: 1rem;
+  }
+
+  .homenav-container {
+    width: min(93.5vw, 15rem);
+  }
+
+  .homenav-placeholder {
+    grid-area: nav;
+    display: block;
+    width: 15rem;
+    height: 150px;
+    visibility: hidden;
+  }
+
+  /* Content takes the second column */
+  .homebody > div:not(.homenav):not(.homenav-placeholder) {
+    grid-area: content;
   }
 }
 </style>

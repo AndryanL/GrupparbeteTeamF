@@ -21,18 +21,20 @@ export default {
 
 <style scoped>
 .navbar {
+  z-index: 0;
   width: 100vw;
-  height: 6rem;
   background-color: var(--color-primary);
+  box-shadow: var(--shadow-elevation-medium);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  position: fixed;
+  top: 0;
 }
 
 .logo {
   margin: 0.5rem;
-  width: 25rem;
+  width: 18rem;
   transition: transform 0.2s;
 }
 
