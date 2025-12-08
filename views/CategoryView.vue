@@ -111,33 +111,30 @@ export default {
   <div class="wrapper">
     <div class="flex-container">
       <div class="loading" v-if="loading">Loading recipes...</div>
-  <div class="homebody">
-    <div class="homenav-placeholder"></div>
-    <div class="homenav">
-      <div class="homenav-container">
-        <SearchBar class="searchbar" @search="searchResult" />
-        <RandomButtonAlt class="random-button" :recipes="recipes" />
-      </div>
-      <Category 
-      class="category" 
-      :categories="categories"
-      :active-id="$route.params.id" />
-    </div>
-    <div v-if="loading">Loading recipes...</div>
-    <div v-else-if="error" class="error">{{ error }}</div>
-    <div v-else>
-      <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
-        Här var det tomt! Inga recept matchar din sökning.
-      </div>
-      <div v-else>
-        <div v-for="recipe in filteredRecipes" :key="recipe.id" class="container">
-          <RecipeCard class="recipe-card" @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
-            :recipe="recipe"></RecipeCard>
+      <div class="homebody">
+        <div class="homenav-placeholder"></div>
+        <div class="homenav">
+          <div class="homenav-container">
+            <SearchBar class="searchbar" @search="searchResult" />
+            <RandomButtonAlt class="random-button" :recipes="recipes" />
+          </div>
+          <Category class="category" :categories="categories" :active-id="$route.params.id" />
+        </div>
+        <div v-if="loading">Loading recipes...</div>
+        <div v-else-if="error" class="error">{{ error }}</div>
+        <div v-else>
+          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
+            Här var det tomt! Inga recept matchar din sökning.
+          </div>
+          <div v-else>
+            <div v-for="recipe in filteredRecipes" :key="recipe.id" class="container">
+              <RecipeCard class="recipe-card" @click="$router.push({ name: 'recipe', params: { id: recipe.id } })"
+                :recipe="recipe"></RecipeCard>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
   </div>
 </template>
 
@@ -148,9 +145,11 @@ h1 {
   margin-left: 0.5rem;
   text-align: center;
 }
+
 .target-section {
   padding: 6rem;
 }
+
 .homebody {
   display: flex;
   flex-direction: column;
