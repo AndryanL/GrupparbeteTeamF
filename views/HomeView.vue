@@ -107,7 +107,8 @@ export default {
           <Category
             class="category"
             :categories="topCategories"
-            :showViewAll="this.categories.length > 10" />
+            :showViewAll="this.categories.length > 10" 
+            :active-id="$route.params.id" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>

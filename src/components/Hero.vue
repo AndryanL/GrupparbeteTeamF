@@ -35,7 +35,7 @@ export default {
   flex-direction: row;
   align-items: end;
   justify-content: end;
-  z-index: 2;
+  z-index: 999;
   position: relative;
 }
 
