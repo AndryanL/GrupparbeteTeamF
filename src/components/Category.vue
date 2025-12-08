@@ -51,10 +51,28 @@ export default {
       <div v-if="isOpen" class="accordion-content">
         <hr />
         <ul class="category-list">
-          <li v-for="category in categories" :key="category.id" @click="goToCategoryView(category.id)"
-            :class="{ 'is-active': activeId === category.id }">
-
-            <span class="category-text">{{ category.name }}</span>
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            class="category-item">
+            <router-link
+              :to="{ name: 'category', params: { id: String(category.id) } }"
+              custom
+              v-slot="{ href, navigate, isActive, isExactActive }">
+              <a
+                :href="href"
+                @click="navigate"
+                :class="{
+                  'category-link': true,
+                  active: isActive,
+                  'exact-active': isExactActive,
+                }"
+                :aria-current="isActive ? 'page' : null"
+                :data-cat-id="category.id"
+                :data-is-active="isActive">
+                <span class="category-text">{{ category.name }}</span>
+              </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -63,6 +81,11 @@ export default {
 </template>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: var(--color-primary-dark);
+}
+
 .category-accordion {
   background-color: var(--color-secondary-mid);
   border-radius: 0.5rem;

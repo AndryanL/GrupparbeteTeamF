@@ -78,6 +78,9 @@ export default {
         );
       }
     },
+    goToRecipe(id) {
+      this.$router.push({ name: "recipe", params: { id: id } });
+    },
   },
   components: {
     RecipeCard,
@@ -122,9 +125,7 @@ export default {
             <div v-for="recipe in filteredRecipes" :key="recipe.id">
               <RecipeCard
                 class="recipe-card"
-                @click="
-                  $router.push({ name: 'recipe', params: { id: recipe.id } })
-                "
+                @click="goToRecipe(recipe.id)"
                 :recipe="recipe"></RecipeCard>
             </div>
           </div>

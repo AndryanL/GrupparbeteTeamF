@@ -10,7 +10,10 @@ export default {
 
 <template>
   <nav class="navbar">
-    <RouterLink to="/">
+    <RouterLink
+      to="/"
+      active-class="active"
+      :aria-current="$route.path === '/' ? 'page' : null">
       <img
         class="logo"
         src="../assets/icons/100k_horisontal.svg"
