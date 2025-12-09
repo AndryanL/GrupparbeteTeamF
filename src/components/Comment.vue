@@ -37,6 +37,7 @@ export default {
         if (!res.ok) throw new Error("Kunde inte hämta kommentarer");
         this.comments = await res.json();
         console.log("Comments loaded", this.comments);
+        this.$emit("update-count", this.comments.length);
       } catch (e) {
         console.error("Comment error", e);
         this.error = e.message || "Något gick fel";
@@ -68,7 +69,7 @@ export default {
 
 <style scoped>
 .comment-card {
-  background: var(--color-secondary-mid);
+  background: var(--color-comment-bg);
   border-radius: 0.5rem;
   margin-block: 0.75rem;
   padding: 0.75rem 2rem;

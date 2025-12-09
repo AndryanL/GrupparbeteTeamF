@@ -1,22 +1,50 @@
 <template>
     <div class="receptWrapper">
-        <div class="receptOverview" v-for="recipe in recipes" :key="recipe.id">
+        <div class="receptOverview">
             <p class="receptInfo">
-                <span data-ingredient-count>{{recipe.ingredientCount}}</span>&nbsp;<span>Ingredienser / </span>
-                <span data-time-count>{{recipe.time}}</span>&nbsp;<span>minuter</span>
+                <span data-ingredient-count>{{ ingredientCount }}</span>&nbsp;<span>Ingredienser / </span>
+                <span data-time-count>{{time}}</span>&nbsp;<span>minuter</span>
             </p>
             <ul class="receptRating">
-                <li class="rating" v-for="n in recipe.rating" :key="n"></li>
+                <li
+                    v-for="n in averageRating"
+                    :key="n"
+                    class="rating"
+                ></li>
             </ul>
         </div>
     </div>
 </template>
+
+<script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+  ingredientCount: Number,
+  time: Number,
+  rating: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+const averageRating = computed(() => {
+  if (!props.rating.length) return 0;
+
+  const sum = props.rating.reduce((acc, n) => acc + n, 0);
+  const avg = sum / props.rating.length;
+
+  return Math.round(avg);
+});
+
+</script>
 
 <style scoped>
     .receptOverview{
         width: 400px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         
         border-radius: 10px;
         background: #381C10;
@@ -59,11 +87,11 @@
 
 </style>
 
-<script setup>
+
+
+<!-- <script setup>
 import { ref } from 'vue'
 
-const recipes = ref([{ingredientCount: 5, time: 15, rating: 5, id: 1, name: "blabla"}]);
+// const recipes = ref([{ingredientCount: 5, time: 15, rating: 5, id: 1, name: "name"}]);
 
-// const recipe = ref({ingredientCount: 5, time: 15, rating: 5, id: 1, "name": "blabla"});
-
-</script>
+</script> -->
