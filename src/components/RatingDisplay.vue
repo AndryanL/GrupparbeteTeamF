@@ -1,0 +1,114 @@
+<script>
+export default {
+  props: {
+    ratings: {
+      // Change from 'rating' to 'ratings' (array)
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      maxStars: 5,
+    };
+  },
+  computed: {
+    averageRating() {
+      if (!this.ratings || this.ratings.length === 0) return 0;
+      const sum = this.ratings.reduce((a, b) => a + b, 0);
+      return sum / this.ratings.length;
+    },
+  },
+};
+</script>
+
+<template>
+  <div class="star-wrapper">
+    <div v-for="star in maxStars" :key="star" class="svg-container">
+      <div v-if="star <= averageRating">
+        <svg
+          class="star star-full"
+          width="17"
+          height="12"
+          viewBox="0 0 17 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="star-outer"
+            d="M16.4102 7.55782V9.93957C16.4102 10.7487 15.7595 11.4051 14.9574 11.4051H2.04272C1.24059 11.4051 0.589844 10.7487 0.589844 9.93957V7.2187C0.589844 6.89941 0.692076 6.59004 0.882778 6.3362L4.74204 1.17804C5.19028 0.579134 6.01404 0.418499 6.65102 0.805212L15.7064 6.30447C16.1429 6.57021 16.4102 7.04616 16.4102 7.5598V7.55782Z"
+            fill="#654434"
+          />
+          <path
+            class="star-inner"
+            d="M4.30859 0.849365C4.92388 0.0276422 6.05611 -0.193814 6.93164 0.337646L15.9873 5.83667V5.83765C16.5852 6.20167 16.9523 6.8535 16.9531 7.55737V9.93921C16.953 11.0477 16.0604 11.9499 14.957 11.95H2.04297C0.939586 11.9499 0.0469929 11.0477 0.046875 9.93921V7.21851C0.0469394 6.782 0.187672 6.35606 0.450195 6.00659L4.30859 0.849365ZM6.37012 1.27124C5.97198 1.02992 5.45694 1.1302 5.17578 1.50562L1.31641 6.66382L1.31543 6.66479C1.25162 6.74982 1.20469 6.8457 1.17383 6.94702H15.6338C15.5739 6.87953 15.5048 6.81943 15.4258 6.77124L6.37012 1.27124Z"
+            fill="#140802"
+          />
+          <defs>
+            <clipPath id="clip0_29_134">
+              <rect width="17" height="12" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div v-else-if="star - 0.5 <= averageRating">
+        <svg
+          class="star star-half"
+          width="17"
+          height="12"
+          viewBox="0 0 17 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.74219 1.17847C5.19044 0.579558 6.01438 0.418707 6.65137 0.80542L14.3799 5.49878C13.4681 6.1264 13 7.24249 13 8.23511C11.0001 7.23514 9.00014 8.99982 9 10.7351C9 10.9818 9.01321 11.2041 9.03125 11.405H2.04297C1.24084 11.405 0.589844 10.7483 0.589844 9.93921V7.21851C0.589872 6.89927 0.692137 6.5895 0.882812 6.33569L4.74219 1.17847Z"
+            fill="#654434"
+          />
+          <path
+            d="M4.26172 0.800903C4.877 -0.0209762 6.00916 -0.242384 6.88477 0.289185L14.9609 5.1925C14.567 5.34344 14.2317 5.57544 13.9551 5.85754L6.32324 1.22278C5.92504 0.981339 5.41006 1.08158 5.12891 1.45715L1.26953 6.61536L1.26855 6.61633C1.20492 6.70128 1.15774 6.79739 1.12695 6.89856H13.2725C13.0916 7.33273 13 7.79566 13 8.2345C11.0002 7.23467 9.00036 8.99932 9 10.7345C9 11.2054 9.03575 11.588 9.09668 11.9015H1.99609C0.893011 11.9015 0.000601791 10.9989 0 9.89075V7.17004C1.7449e-05 6.73369 0.141025 6.30755 0.40332 5.95813L4.26172 0.800903Z"
+            fill="#140802"
+          />
+          <path d="M12.5 8C13 5.5 14 5.33333 14.5 5" stroke="black" />
+          <path
+            d="M12.5 11.0005L12 9.5L14 10.0005L12.5 11.0005Z"
+            fill="#31180C"
+          />
+          <path
+            d="M15.5 10.0002L15 8L16.5 8.5V9.5L15.5 10.0002Z"
+            fill="#31180C"
+          />
+          <path d="M15 11H16V12H15V11Z" fill="#31180C" />
+        </svg>
+      </div>
+      <div v-else>
+        <svg
+          width="0"
+          height="0"
+          viewBox="0 0 0 0"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        ></svg>
+      </div>
+    </div>
+    <p class="rating-number">
+      {{ averageRating.toFixed(1) }} från {{ ratings.length }} röster
+    </p>
+  </div>
+</template>
+
+<style scoped>
+.star-wrapper {
+  display: flex;
+}
+
+.star {
+  width: 1.25rem;
+  height: auto;
+  margin-inline: 0.2rem;
+}
+
+.rating-number {
+  margin-inline: 0.25rem;
+  font-family: "DM Sans", sans-serif;
+}
+</style>
