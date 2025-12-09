@@ -11,7 +11,7 @@ export default {
         <div class="GitHub-link">
             <p>Team F repo</p>
             <a href="https://github.com/AndryanL/GrupparbeteTeamF" target="_blank">
-                <img src="../assets/icons/github-.svg" alt="GitHub logo" />
+                <img class="icon" src="../assets/icons/github-.svg" alt="GitHub logo" />
             </a>
         </div>
 
@@ -45,7 +45,6 @@ export default {
 </template>
 
 <style scoped>
-
 .footer {
     width: 100%;
     background-color: var(--color-primary);
@@ -60,9 +59,10 @@ export default {
 }
 
 .footer p {
+    font-family: comfortaa, sans-serif;
     color: var(--color-primary-light);
     margin: 0.5rem 1rem 0.5rem 0;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .GitHub-link {
@@ -103,15 +103,15 @@ export default {
     text-align: center;
 }
 
-.Link > a > img.icon {
+img.icon {
     width: 2rem;
     height: auto;
     margin-left: 0.5rem;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease;
 }
 
-.Link > a > img.icon:hover {
-    transform: scale(1.1);
-}  
+img.icon:hover {
+    transform: scale(1.5);
+}
 
 </style>
