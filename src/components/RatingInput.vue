@@ -22,7 +22,9 @@ export default {
   methods: {
     setRating(n) {
       if (!this.isLocked) {
-        document.querySelector(".star-rating.reverse").classList.remove("reverse");
+        document
+          .querySelector(".star-rating.reverse")
+          .classList.remove("reverse");
         this.rating = n;
         this.isLocked = true;
         this.$emit("update:modelValue", n);
@@ -103,10 +105,7 @@ h2 {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: var(--color-secondary-mid);
-  box-shadow: var(--shadow-elevation-medium);
+  padding-bottom: 2rem;
 }
 
 .content-wrapper {
@@ -121,18 +120,18 @@ h2 {
   justify-content: center;
 }
 
-.star-rating.reverse{
+.star-rating.reverse {
   flex-direction: row-reverse;
 }
 
 .star {
   cursor: pointer;
   height: auto;
-  margin-inline: 0.2rem;
+  padding: 0.2rem;
 }
 
 .star-rating.reverse .star:hover .svg-empty,
-.star-rating.reverse .star:hover ~ .star .svg-empty{
+.star-rating.reverse .star:hover ~ .star .svg-empty {
   fill: var(--color-primary);
 }
 

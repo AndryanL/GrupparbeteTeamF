@@ -61,6 +61,7 @@ button {
   background-color: var(--color-secondary-mid);
   box-shadow: var(--shadow-elevation-low);
   transition: transform 0.2s, box-shadow 0.2s;
+  text-align: start;
 }
 
 .card-container:hover {

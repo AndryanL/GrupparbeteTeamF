@@ -20,6 +20,7 @@ defineProps({
   color: var(--color-white);
   font-family: "Playwrite DK Uloopet", cursive;
   font-size: 1rem;
+  border-radius: 0.5rem;
 }
 
 .knapp:hover {
