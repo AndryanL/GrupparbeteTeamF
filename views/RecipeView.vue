@@ -87,11 +87,11 @@ export default {
       <div v-else-if="error" class="error">{{ error }}</div>
       <div v-else-if="recipe">
         <RecipeCard :recipe="recipe" />
-        <!-- <ReceptOverview 
+        <ReceptOverview
           :ingredientCount="recipe.ingredients.length"
           :time="recipe.timeInMins"
           :rating="recipe.ratings"
-        /> -->
+        />
         <div class="rating-input-container">
           <RatingInput :recipeId="recipe.id" />
         </div>
@@ -113,8 +113,8 @@ export default {
           />
           <h2>Kommentarer ({{ commentCount }})</h2>
 
-          <Comment 
-            :recipeId="recipe.id" 
+          <Comment
+            :recipeId="recipe.id"
             :key="commentComponentKey"
             @update-count="commentCount = $event"
           />

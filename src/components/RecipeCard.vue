@@ -14,11 +14,18 @@ export default {
   components: {
     RatingDisplay,
   },
+  methods: {
+    isCurrentRecipe() {
+      return (
+        this.$route.name === "recipe" && this.$route.params.id == this.recipe.id
+      ); // Use == for type coercion
+    },
+  },
 };
 </script>
 
 <template>
-  <div v-if="isLoaded" class="card-wrapper">
+  <button class="card-wrapper" tabindex="0" @click="$emit('click')">
     <div class="card-container">
       <div class="card-imagewrapper">
         <img :src="recipe.imageUrl" :alt="recipe.title" />
@@ -35,10 +42,15 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+  </button>
 </template>
 
 <style scoped>
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .card-container {
   width: min(93.5vw, 40rem);
   margin-bottom: 0.5rem;
