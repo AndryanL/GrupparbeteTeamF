@@ -7,11 +7,12 @@
   --color-primary-mid: #8f7f7b;
   --color-primary-midlight: #e1ddd6;
   --color-primary-light: #f4f4e4;
-  --color-secondary-dark: #d76b79;
+  --color-secondary-dark: #d3858f;
   --color-secondary: #ff909f;
   --color-secondary-mid: #f4efe4 /* ffc2ca; */;
   --color-secondary-light: #ffdcdf;
   --color-tertiary: #ffc2ca /* dcd1a7 */;
+  --color-comment-bg: #f5c5c9;
 
   --shadow-color: 60deg 15% 65%;
   --shadow-color-dark: 30deg 60% 15%;

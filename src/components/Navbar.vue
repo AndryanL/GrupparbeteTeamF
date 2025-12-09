@@ -10,21 +10,25 @@ export default {
 
 <template>
   <nav class="navbar">
-    <RouterLink to="/">
+    <RouterLink
+      to="/"
+      active-class="active"
+      :aria-current="$route.path === '/' ? 'page' : null"
+    >
       <img
         class="logo"
         src="../assets/icons/100k_horisontal.svg"
-        alt="100 kladdkakor logo" />
+        alt="100 kladdkakor logo"
+      />
     </RouterLink>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
-  z-index: 0;
+  z-index: 1;
   width: 100vw;
   background-color: var(--color-primary);
-  box-shadow: var(--shadow-elevation-medium);
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -22,6 +22,9 @@ export default {
   methods: {
     setRating(n) {
       if (!this.isLocked) {
+        document
+          .querySelector(".star-rating.reverse")
+          .classList.remove("reverse");
         this.rating = n;
         this.isLocked = true;
         this.$emit("update:modelValue", n);
@@ -41,7 +44,7 @@ export default {
     <div class="content-wrapper">
       <h2 v-if="!isLocked">Vad tyckte du om receptet?</h2>
       <h2 v-else>Tack för ditt betyg!</h2>
-      <div class="star-rating">
+      <div class="star-rating reverse">
         <span v-for="n in 5" :key="n" class="star" @click="setRating(n)">
           <svg
             v-if="n <= rating"
@@ -102,10 +105,7 @@ h2 {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: var(--color-secondary-mid);
-  box-shadow: var(--shadow-elevation-medium);
+  padding-bottom: 2rem;
 }
 
 .content-wrapper {
@@ -120,13 +120,22 @@ h2 {
   justify-content: center;
 }
 
+.star-rating.reverse {
+  flex-direction: row-reverse;
+}
+
 .star {
   cursor: pointer;
   height: auto;
-  margin-inline: 0.2rem;
+  padding: 0.2rem;
 }
 
-.svg-empty:hover {
+.star-rating.reverse .star:hover .svg-empty,
+.star-rating.reverse .star:hover ~ .star .svg-empty {
   fill: var(--color-primary);
 }
+
+/* .svg-empty:hover {
+  fill: var(--color-primary);
+} */
 </style>

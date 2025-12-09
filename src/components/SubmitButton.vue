@@ -16,11 +16,11 @@ defineProps({
 @import url("https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap");
 
 .knapp {
-  border-radius: 0.5rem;
   background-color: var(--color-secondary);
   color: var(--color-white);
   font-family: "Playwrite DK Uloopet", cursive;
   font-size: 1rem;
+  border-radius: 0.5rem;
 }
 
 .knapp:hover {

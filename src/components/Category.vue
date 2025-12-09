@@ -10,6 +10,9 @@ export default {
       type: Boolean,
       default: true,
     },
+    activeId: {
+      type: String,
+    },
   },
   data() {
     return {
@@ -35,37 +38,41 @@ export default {
     <div class="accordion-header" @click="toggleAccordion">
       <h2 class="accordion-title">Kategorier</h2>
       <span class="accordion-icon">
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          :class="{ rotated: isOpen }">
-          <path
-            d="M4 6L8 10L12 6"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
+        <svg width="16" height="16" viewBox="0 0 16 16" :class="{ rotated: isOpen }">
+          <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
       </span>
     </div>
 
     <!-- Accordion Content -->
-    <transition
-      name="accordion"
-      @enter="startEnterTransition"
-      @after-enter="endEnterTransition"
-      @before-leave="startLeaveTransition"
-      @after-leave="endLeaveTransition">
+    <transition name="accordion" @enter="startEnterTransition" @after-enter="endEnterTransition"
+      @before-leave="startLeaveTransition" @after-leave="endLeaveTransition">
       <div v-if="isOpen" class="accordion-content">
         <hr />
         <ul class="category-list">
           <li
             v-for="category in categories"
             :key="category.id"
-            @click="goToCategoryView(category.id)"
             class="category-item">
-            <span class="category-text">{{ category.name }}</span>
+            <router-link
+              :to="{ name: 'category', params: { id: String(category.id) } }"
+              custom
+              v-slot="{ href, navigate, isActive, isExactActive }">
+              <a
+                :href="href"
+                @click="navigate"
+                :class="{
+                  'category-link': true,
+                  active: isActive,
+                  'exact-active': isExactActive,
+                }"
+                :aria-current="isActive ? 'page' : null"
+                :data-cat-id="category.id"
+                :data-is-active="isActive">
+                <span class="category-text">{{ category.name }}</span>
+              </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -74,6 +81,11 @@ export default {
 </template>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: var(--color-primary-dark);
+}
+
 .category-accordion {
   background-color: var(--color-secondary-mid);
   border-radius: 0.5rem;
@@ -142,7 +154,7 @@ hr {
   margin: 0;
 }
 
-.category-item {
+.category-list li {
   font-family: "DM Sans", sans-serif;
   font-weight: 300;
   margin-block: 0.75rem;
@@ -154,13 +166,15 @@ hr {
   padding: 0.25rem 0.5rem;
 }
 
-.category-item:hover {
+.category-list li:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateX(2px);
 }
 
-.category-item:active {
-  font-weight: 700;
+
+
+.category-list li.is-active .category-text {
+  font-weight: 600;
 }
 
 .category-text {

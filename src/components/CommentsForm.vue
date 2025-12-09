@@ -2,25 +2,31 @@
   <form @submit.prevent="addComment" class="comment-form">
     <fieldset class="comment-box">
       <legend class="comm">Lämna en kommentar...</legend>
-      <InputField placeholder="Vad heter du?" v-model="name"
-      v-on:input="toUpper"/>
-      <br />
       <!-- <InputField placeholder="Din kommentar" v-model="comment" /> -->
       <textarea
         placeholder="Vad tycker du om receptet?"
         v-model="comment"
         v-on:input="toUpper"
         rows="10"
-        cols="50">
+        cols="50"
+      >
       </textarea>
       <br />
-      <SubmitButton text="Publicera" type="submit" />
+      <div style="display: flex">
+        <InputField
+          class="name_area"
+          placeholder="Vad heter du?"
+          v-model="name"
+          v-on:input="toUpper"
+          style="width: 100%; margin-right: 5px"
+        />
+        <SubmitButton text="Publicera" type="submit" />
+      </div>
     </fieldset>
   </form>
 </template>
 
 <script>
-
 import InputField from "./InputFieldForCommentsForm.vue";
 import SubmitButton from "./SubmitButton.vue";
 import { postComment } from "@/apiFunctions.js";
@@ -47,7 +53,6 @@ export default {
     async addComment() {
       if (!this.name || !this.comment) return;
 
-      
       let comment = {
         name: this.name,
         comment: this.comment,
@@ -65,62 +70,61 @@ export default {
     },
 
     toUpper(event) {
-    const element = event.target;
-    element.value = element.value.replace(/([a-ö]{1})/ui, (ch)=>{return ch.toUpperCase()});
-  
+      const element = event.target;
+      element.value = element.value.replace(/([a-ö]{1})/iu, (ch) => {
+        return ch.toUpperCase();
+      });
     },
-    
   },
   emits: ["onCommentCreated"],
 };
 </script>
 
 <style scoped>
-.comm{
-  color: #ccc;
-  font-size: 1.2em;
+.comm {
+  font-size: 1.5rem;
+  color: var(--color-secondary-mid);
   margin-bottom: 10px;
-  font-size: 1em;
-  font-family: Playwrite DK Uloopet;
+  font-family: "Playwrite DK Uloopet", cursive;
 }
 .comment-box {
   border: none;
-  padding: 15px 15px 15px 0;
   margin-bottom: 20px;
-  
+  padding: 0;
 }
 
-.comment-box>input{
+.comment-box > input {
   margin-bottom: 5px;
-  font-family: Playwrite DK Uloopet;
-   
+
+  font-family: "DM Sans";
 }
 
- .comment-box>textarea {
-  width: 500px;
+.comment-box > textarea {
+  width: 100%;
   height: 100px;
   resize: none;
-  font-family: Playwrite DK Uloopet;
-  background-color: #F4F4E4;
-  padding: 10px 20px;
-  border-radius: 5px;
-  color: #A9816E;
-  outline: none;
+  font-family: "DM Sans";
+  background-color: var(--color-secondary-mid);
+  padding: 20px;
+  border-radius: 0.5rem;
+  color: #a9816e;
+  margin-bottom: 0.15rem;
   border: none;
+}
 
- }
- 
+.name_area {
+  font-size: 1rem;
+  font-family: "DM Sans", sans-serif;
+}
+
 .comment {
   padding: 10px 0;
   border-bottom: 1px solid #eee;
 }
 
-.comment-box>.knapp {
- padding: 10px 40px;
- min-width: auto;
- font-size: 20px;
-
-
+.comment-box > .knapp {
+  padding: 10px 40px;
+  min-width: auto;
+  font-size: 20px;
 }
-
 </style>

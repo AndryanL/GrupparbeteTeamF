@@ -37,6 +37,7 @@ export default {
         if (!res.ok) throw new Error("Kunde inte hämta kommentarer");
         this.comments = await res.json();
         console.log("Comments loaded", this.comments);
+        this.$emit("update-count", this.comments.length);
       } catch (e) {
         console.error("Comment error", e);
         this.error = e.message || "Något gick fel";
@@ -61,14 +62,22 @@ export default {
         <h3 class="comment-name">{{ c.name || "Anonym" }}</h3>
         <span class="comment-date">{{ formatDate(c.createdAt) }}</span>
       </header>
+      <hr />
       <p class="comment-text">{{ c.comment }}</p>
     </article>
   </section>
 </template>
 
 <style scoped>
+hr {
+  border: none;
+  border-top: solid 1px var(--color-secondary-dark);
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-top: 0;
+}
 .comment-card {
-  background: var(--color-secondary-mid);
+  background: var(--color-comment-bg);
   border-radius: 0.5rem;
   margin-block: 0.75rem;
   padding: 0.75rem 2rem;
@@ -76,18 +85,25 @@ export default {
 .comment-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 12px;
-}
-.comment-name,
-.comment-text,
-.comment-date {
-  font-family: "Comfortaa", sans-serif;
+  font-size: 1rem;
 }
 .comment-name {
-  font-weight: 600;
+  font-family: "Playwrite Dk Uloopet", cursive;
 }
+.comment-name {
+  font-weight: 400;
+}
+
+.comment-text,
 .comment-date {
-  font-size: 0.875rem;
-  color: #31180c;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.comment-text {
+  padding-block: 1rem;
+  font-size: 1rem;
 }
 </style>

@@ -1,62 +1,99 @@
 <script>
-import iconUrl from '@/assets/images/bullet-point.svg'
+import iconUrl from "@/assets/images/bullet-point.svg";
 
 export default {
-    name: "IngredientsList",
-    props: {
-        ingredients: {
-            type: Array,
-            required: true,
-        },
+  name: "IngredientsList",
+  props: {
+    ingredients: {
+      type: Array,
+      required: true,
     },
-    data() {
-        return {
-            iconUrl
-        }
-    }
+  },
+  data() {
+    return {
+      iconUrl,
+    };
+  },
 };
 </script>
 
 <template>
-    <ul class="ingredients-list">
-        <li v-for="(ingredient, index) in ingredients" :key="index" class="ingredients-list__item">
-            <img :src="iconUrl" alt="ingredient" class="ingredient-icon" />
-            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
-        </li>
+  <div class="ingredients-list">
+    <h2>Ingredienser</h2>
+    <hr />
+    <ul>
+      <li
+        v-for="(ingredient, index) in ingredients"
+        :key="index"
+        class="ingredients-list__item"
+      >
+        <div class="item-spacing">
+          <span class="ingredient_name">{{ ingredient.name }}</span>
+          <span class="ingredient_amount"
+            >{{ ingredient.amount }} {{ ingredient.unit }}</span
+          >
+        </div>
+      </li>
     </ul>
+  </div>
 </template>
 
 <style scoped>
+hr {
+  border: none;
+  border-top: solid 1px var(--color-primary-midlight);
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+h2 {
+  font-family: "Playwrite Dk Uloopet", cursive;
+  margin-bottom: 0.5rem;
+}
+
 .ingredients-list {
-    list-style: none;
-    margin: 0;
-    padding: 20px 25px;
-    background: #DCD1A7;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  padding: 0.75rem 1rem;
+  color: #31180c;
+  list-style-position: inside;
+  border: solid 1px var(--color-primary-midlight);
+  border-radius: 0.5rem;
+  background-color: var(--color-secondary-mid);
+  box-shadow: var(--shadow-elevation-low);
+}
+
+ul {
+  padding: 0;
 }
 
 .ingredients-list__item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0;
-    font-style: italic;
-    font-family: "Comfortaa", sans-serif;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-family: "Comfortaa", sans-serif;
+}
+
+.ingredients-list__item:last-of-type {
+  margin-bottom: 0;
 }
 
 .ingredient-icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
 }
 
 .ingredients-list__item::before {
-    display: none;
+  display: none;
+}
+
+.item-spacing {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ingredient_amount {
+  min-width: 3rem;
 }
 </style>
