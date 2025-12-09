@@ -27,7 +27,6 @@ export default {
     RatingInput,
     Comment,
     Navbar,
-    ReceptOverview,
     Footer,
   },
 };
