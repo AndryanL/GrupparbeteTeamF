@@ -16,6 +16,7 @@ export default {
       loading: false,
       error: null,
       commentComponentKey: 0,
+      commentCount: 0,
     };
   },
   components: {
@@ -25,6 +26,7 @@ export default {
     Comment,
     IngredientList,
     CommentsForm,
+    ReceptOverview,
   },
   computed: {
     recipeId() {
@@ -85,6 +87,11 @@ export default {
       <div v-else-if="error" class="error">{{ error }}</div>
       <div v-else-if="recipe">
         <RecipeCard :recipe="recipe" />
+        <!-- <ReceptOverview 
+          :ingredientCount="recipe.ingredients.length"
+          :time="recipe.timeInMins"
+          :rating="recipe.ratings"
+        /> -->
         <div class="rating-input-container">
           <RatingInput :recipeId="recipe.id" />
         </div>
@@ -104,8 +111,13 @@ export default {
             :recipeId="recipe.id"
             @on-comment-created="forceCommentComponentReRender"
           />
-          <h2>Kommentarer</h2>
-          <Comment :recipeId="recipe.id" :key="commentComponentKey" />
+          <h2>Kommentarer ({{ commentCount }})</h2>
+
+          <Comment 
+            :recipeId="recipe.id" 
+            :key="commentComponentKey"
+            @update-count="commentCount = $event"
+          />
         </div>
       </div>
       <div v-else>

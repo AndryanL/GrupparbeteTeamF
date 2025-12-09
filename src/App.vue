@@ -26,11 +26,13 @@ export default {
     RatingInput,
     Comment,
     Navbar,
+    ReceptOverview,
   },
 };
 </script>
 
 <template>
+  
   <!-- 
   <Navbar /> -->
   <main>
