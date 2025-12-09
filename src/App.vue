@@ -8,6 +8,7 @@ import RatingInput from "./components/RatingInput.vue";
 import Comment from "@/components/Comment.vue";
 import { getData } from "./apiFunctions.js";
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
@@ -27,17 +28,17 @@ export default {
     Comment,
     Navbar,
     ReceptOverview,
+    Footer,
   },
 };
 </script>
 
 <template>
-  
-  <!-- 
-  <Navbar /> -->
+  <Navbar />
   <main>
     <RouterView />
   </main>
+  <Footer />
 </template>
 
 <style scoped>

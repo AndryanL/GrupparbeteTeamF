@@ -19,7 +19,7 @@ export default {
   cursor: pointer;
   min-width: 181px;
   padding: 14px 52px;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: none;
   background: #ff909f;
   color: #fffaf6;

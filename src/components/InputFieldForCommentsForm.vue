@@ -8,12 +8,11 @@
 </template>
 
 <script setup>
-import { defineProps, defineModel } from 'vue';
+import { defineProps, defineModel } from "vue";
 
 defineProps({
-  placeholder: String
+  placeholder: String,
 });
-
 
 const model = defineModel();
 </script>
@@ -28,12 +27,12 @@ fieldset {
 input.inputField {
   width: 266px;
   padding: 13.5px 20px;
-  border-radius: 5px;
-  background: #F4F4E4;
-  color: #A9816E;
+  border-radius: 0.5rem;
+  background-color: var(--color-secondary-mid);
+  color: #a9816e;
   border: none;
 }
-input.inputField:focus{
-  outline: 1px solid #A9816E;
+input.inputField:focus {
+  outline: 1px solid #a9816e;
 }
 </style>

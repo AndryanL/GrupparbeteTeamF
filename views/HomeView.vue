@@ -5,8 +5,6 @@ import SearchBar from "../src/components/SearchBar.vue";
 import Category from "@/components/Category.vue";
 import RandomButtonAlt from "@/components/RandomButtonAlt.vue";
 import Hero from "@/components/Hero.vue";
-import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
@@ -89,15 +87,13 @@ export default {
     Category,
     RandomButtonAlt,
     Hero,
-    Navbar,
-    Footer,
   },
 };
 </script>
 
 <template>
   <Hero :pageId="'#target-section'"></Hero>
-  <Navbar />
+
   <div id="target-section"></div>
   <div class="wrapper">
     <div class="flex-container">
@@ -112,15 +108,17 @@ export default {
           <Category
             class="category"
             :categories="topCategories"
-            :showViewAll="this.categories.length > 10" 
-            :active-id="$route.params.id" />
+            :showViewAll="this.categories.length > 10"
+            :active-id="$route.params.id"
+          />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
           <div
             v-if="this.recipes.length > 0 && filteredRecipes.length === 0"
-            class="no-results">
+            class="no-results"
+          >
             Här finns inga kladdkakor som matchar din sökning. Prova igen!
           </div>
           <div v-else>
@@ -128,14 +126,14 @@ export default {
               <RecipeCard
                 class="recipe-card"
                 @click="goToRecipe(recipe.id)"
-                :recipe="recipe"></RecipeCard>
+                :recipe="recipe"
+              ></RecipeCard>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <Footer />
 </template>
 
 <style scoped>
