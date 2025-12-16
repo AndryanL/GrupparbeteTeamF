@@ -51,25 +51,14 @@ export default {
       <div v-if="isOpen" class="accordion-content">
         <hr />
         <ul class="category-list">
-          <li
-            v-for="category in categories"
-            :key="category.id"
-            class="category-item">
-            <router-link
-              :to="{ name: 'category', params: { id: String(category.id) } }"
-              custom
+          <li v-for="category in categories" :key="category.id" class="category-item">
+            <router-link :to="{ name: 'category', params: { id: String(category.id) } }" custom
               v-slot="{ href, navigate, isActive, isExactActive }">
-              <a
-                :href="href"
-                @click="navigate"
-                :class="{
-                  'category-link': true,
-                  active: isActive,
-                  'exact-active': isExactActive,
-                }"
-                :aria-current="isActive ? 'page' : null"
-                :data-cat-id="category.id"
-                :data-is-active="isActive">
+              <a :href="href" @click="navigate" :class="{
+                'category-link': true,
+                active: isActive,
+                'exact-active': isExactActive,
+              }" :aria-current="isActive ? 'page' : null" :data-cat-id="category.id" :data-is-active="isActive">
                 <span class="category-text">{{ category.name }}</span>
               </a>
             </router-link>
@@ -148,6 +137,12 @@ hr {
   margin-bottom: 0.5rem;
 }
 
+.category-link.active .category-text,
+.category-link.exact-active .category-text {
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
 .category-list {
   list-style: none;
   padding: 0;
@@ -169,12 +164,6 @@ hr {
 .category-list li:hover {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateX(2px);
-}
-
-
-
-.category-list li.is-active .category-text {
-  font-weight: 600;
 }
 
 .category-text {
