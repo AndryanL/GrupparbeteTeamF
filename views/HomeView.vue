@@ -72,9 +72,21 @@ export default {
       if (!searchValue) {
         this.filteredRecipes = [...this.recipes];
       } else {
-        this.filteredRecipes = this.recipes.filter((recipe) =>
-          recipe.title.toUpperCase().includes(searchValue.toUpperCase())
-        );
+        const searchUpper = searchValue.toUpperCase();
+        this.filteredRecipes = this.recipes.filter((recipe) => {
+          
+          const titleMatch = recipe.title.toUpperCase().includes(searchUpper);
+
+          
+          const categoryMatch = recipe.categories &&
+            recipe.categories.some(cat => cat.toUpperCase().includes(searchUpper));
+
+          
+          const ingredientMatch = recipe.ingredients &&
+            recipe.ingredients.some(ing => ing.name.toUpperCase().includes(searchUpper));
+
+          return titleMatch || categoryMatch || ingredientMatch;
+        });
       }
     },
     goToRecipe(id) {
@@ -105,29 +117,18 @@ export default {
             <SearchBar class="searchbar" @search="searchResult" />
             <RandomButtonAlt class="random-button" :recipes="recipes" />
           </div>
-          <Category
-            class="category"
-            :categories="topCategories"
-            :showViewAll="this.categories.length > 10"
-            :active-id="$route.params.id"
-          />
+          <Category class="category" :categories="topCategories" :showViewAll="this.categories.length > 10"
+            :active-id="$route.params.id" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
-          <div
-            v-if="this.recipes.length > 0 && filteredRecipes.length === 0"
-            class="no-results"
-          >
+          <div v-if="this.recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
             Här finns inga kladdkakor som matchar din sökning. Prova igen!
           </div>
           <div v-else>
             <div v-for="recipe in filteredRecipes" :key="recipe.id">
-              <RecipeCard
-                class="recipe-card"
-                @click="goToRecipe(recipe.id)"
-                :recipe="recipe"
-              ></RecipeCard>
+              <RecipeCard class="recipe-card" @click="goToRecipe(recipe.id)" :recipe="recipe"></RecipeCard>
             </div>
           </div>
         </div>
@@ -168,7 +169,7 @@ h1 {
   align-items: center;
 }
 
-.flex-container > * {
+.flex-container>* {
   width: 100%;
 }
 
@@ -258,7 +259,7 @@ h1 {
   }
 
   /* Content takes the second column */
-  .homebody > div:not(.homenav):not(.homenav-placeholder) {
+  .homebody>div:not(.homenav):not(.homenav-placeholder) {
     grid-area: content;
   }
 }

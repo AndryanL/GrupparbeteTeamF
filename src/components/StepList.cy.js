@@ -1,24 +1,33 @@
 import StepList from "./StepList.vue";
-import { getRecipes } from "../MockApiData.js";
-
-const recipeData = getRecipes();
+import { getData } from "../apiFunctions.js";
 
 describe("<StepList />", () => {
-  const singleRecipe = recipeData[0];
+  let recipeData;
+
+  before(async () => {
+    // Använd async/await för att säkerställa att data laddas
+    recipeData = await getData("https://recipes.bocs.se/api/v1/f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c/recipes");
+  });
 
   it("renders recipe steps", () => {
+    // Kontrollera att vi har data
+    expect(recipeData).to.exist;
+    expect(recipeData.length).to.be.greaterThan(0);
+    
+    const singleRecipe = recipeData[0];
+
     cy.mount(StepList, {
       props: {
-        steps: singleRecipe.steps,
+        steps: singleRecipe.instructions,
       },
     });
 
-    // Expect the same number of list items as steps
-    cy.get("li").should("have.length", singleRecipe.steps.length);
+    // Expect the same number of list items as instructions
+    cy.get("li").should("have.length", singleRecipe.instructions.length);
 
-    // Each step text should be rendered
-    singleRecipe.steps.forEach((step) => {
-      cy.contains(step);
+    // Each instruction text should be rendered
+    singleRecipe.instructions.forEach((instruction) => {
+      cy.contains(instruction);
     });
   });
 });
