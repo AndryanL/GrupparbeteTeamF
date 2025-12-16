@@ -191,4 +191,15 @@ h1 {
     right: 4rem;
   }
 }
+
+@media (max-width: 520px) {
+  h1 {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    margin-top: 5rem;
+    text-align: center;
+    width: 100%;
+  }
+}
 </style>
