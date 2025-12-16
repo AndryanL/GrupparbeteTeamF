@@ -22,6 +22,7 @@ export default {
   methods: {
     setRating(n) {
       if (!this.isLocked) {
+        n = 5 - n + 1; // Reverse the rating to match visual order
         document
           .querySelector(".star-rating.reverse")
           .classList.remove("reverse");
