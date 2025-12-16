@@ -81,17 +81,29 @@ export default {
       let filtered =
         categoryId && currentCat
           ? this.recipes.filter(
-              (recipe) =>
-                recipe.categories && recipe.categories.includes(currentCat.name)
-            )
+            (recipe) =>
+              recipe.categories && recipe.categories.includes(currentCat.name)
+          )
           : [...this.recipes];
 
       if (!searchValue) {
         this.filteredRecipes = filtered;
       } else {
-        this.filteredRecipes = filtered.filter((recipe) =>
-          recipe.title.toUpperCase().includes(searchValue.toUpperCase())
-        );
+        const searchUpper = searchValue.toUpperCase();
+        this.filteredRecipes = filtered.filter((recipe) => {
+  
+          const titleMatch = recipe.title.toUpperCase().includes(searchUpper);
+
+         
+          const categoryMatch = recipe.categories &&
+            recipe.categories.some(cat => cat.toUpperCase().includes(searchUpper));
+
+         
+          const ingredientMatch = recipe.ingredients &&
+            recipe.ingredients.some(ing => ing.name.toUpperCase().includes(searchUpper));
+
+          return titleMatch || categoryMatch || ingredientMatch;
+        });
       }
     },
   },
@@ -118,34 +130,19 @@ export default {
             <SearchBar class="searchbar" @search="searchResult" />
             <RandomButtonAlt class="random-button" :recipes="recipes" />
           </div>
-          <Category
-            class="category"
-            :categories="categories"
-            :active-id="$route.params.id"
-          />
+          <Category class="category" :categories="categories" :active-id="$route.params.id" />
         </div>
         <div v-if="loading">Loading recipes...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
         <div v-else>
-          <div
-            v-if="recipes.length > 0 && filteredRecipes.length === 0"
-            class="no-results"
-          >
+          <div v-if="recipes.length > 0 && filteredRecipes.length === 0" class="no-results">
             Här var det tomt! Inga recept matchar din sökning.
           </div>
           <div v-else>
-            <div
-              v-for="recipe in filteredRecipes"
-              :key="recipe.id"
-              class="container"
-            >
-              <RecipeCard
-                class="recipe-card"
-                @click="
-                  $router.push({ name: 'recipe', params: { id: recipe.id } })
-                "
-                :recipe="recipe"
-              ></RecipeCard>
+            <div v-for="recipe in filteredRecipes" :key="recipe.id" class="container">
+              <RecipeCard class="recipe-card" @click="
+                $router.push({ name: 'recipe', params: { id: recipe.id } })
+                " :recipe="recipe"></RecipeCard>
             </div>
           </div>
         </div>
@@ -188,7 +185,7 @@ h1 {
   align-items: center;
 }
 
-.flex-container > * {
+.flex-container>* {
   width: 100%;
 }
 
@@ -278,7 +275,7 @@ h1 {
   }
 
   /* Content takes the second column */
-  .homebody > div:not(.homenav):not(.homenav-placeholder) {
+  .homebody>div:not(.homenav):not(.homenav-placeholder) {
     grid-area: content;
   }
 }
